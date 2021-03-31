@@ -1,0 +1,53 @@
+<%# Needs: contentSectionBlockContact = {action, method, title, description} %>
+
+<div class="cl-content-section-block-contact">
+
+    <div class="cl-content-section-block-contact-div-title">
+        <h5>
+            <%= contentSectionBlockContact.title %>
+        </h5>
+    </div>
+
+    <div class="cl-content-section-block-contact-div-description">
+        <p>
+            <%= contentSectionBlockContact.description %>
+        </p>
+    </div>
+
+    <form 
+        action="<%= contentSectionBlockContact.action %>"
+        method="<%= contentSectionBlockContact.method %>"
+        class="cl-content-section-block-contact-form">
+
+        <div class="cl-content-section-block-contact-form-div-item">
+            <label>Prenom</label>
+            <input name="prenom" type="text">
+        </div>
+
+        <div class="cl-content-section-block-contact-form-div-item">
+            <label>Nom</label>
+            <input name="nom" type="text">
+        </div>
+
+        <div class="cl-content-section-block-contact-form-div-item">
+            <label>Email</label>
+            <input name="email" type="email">
+        </div>
+
+        <div class="cl-content-section-block-contact-form-div-item">
+            <label>Telephone</label>
+            <input name="telephone" type="number">
+        </div>
+
+        <div class="cl-content-section-block-contact-form-div-item">
+            <label>Message</label>
+            <textarea name="message"></textarea>
+        </div>
+
+        <button type="submit">
+            Envoyer
+        </button>
+
+    </form>
+
+</div>
