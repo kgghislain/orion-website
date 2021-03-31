@@ -24,6 +24,3 @@ This directory contents the necessary ejs code to generate every web pages the s
 2. database
 This directory contents the pghandler.js file. That file contains all functions to communicate with the PostgresSql data base.
 In the same directory, we have the *queries/* directory which contains javascript abstractions for every single SQL request performed in pghandler.js.
-
-3. server
-This directory contents the pages.js file. That file contains functions that takes arguments and generate web pages using the ejs in the *contents/* directory.
