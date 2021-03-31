@@ -8,12 +8,21 @@ var bodyParser = require('body-parser');
 app.set('view engine', 'ejs');
 // Link the ./src/contents/provides directory to provides/ name 
 app.use('./src/contents/provides', express.static('provides'));
-app.use('./src/contents/views', express.static('views'));
+// app.set('views', './src/contents/views');
+app.set('provides', './src/contents/provides');
 
 console.log("Server is starting ... ");
 
 app.get('/', (request, response) => {
-    response.send("Server started successfully.");
+    response.render('directions/home', {
+        menuBarItems: [
+            {name: "Acceuil", url: ""},
+            {name: "Services", url: ""},
+            {name: "A Propos", url: ""},
+            {name: "Contact", url: ""},
+            {name: "Projets", url: ""}
+        ]
+    });
 });
 
 let port = process.env.PORT;

@@ -1,0 +1,12 @@
+<%# Needs : menuBarItems = [{name, url}] %>
+
+<div id="id-menubar">
+    <%- include('menuBarHome') %>
+    <nav id="id-menubar-nav">
+
+        <% menuBarItems.forEach( function(menuBarItem) { %>
+            <%- include('menuBarItem', {menuBarItem: menuBarItem}); %>
+        <% }); %>
+
+    </nav>
+</div>
