@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 app.set('view engine', 'ejs');
 // Link the ./src/contents/provides directory to provides/ name 
 app.use('./src/contents/provides', express.static('provides'));
-// app.set('views', './src/contents/views');
+app.set('views', './src/contents/views');
 app.set('provides', './src/contents/provides');
 
 console.log("Server is starting ... ");
@@ -21,6 +21,28 @@ app.get('/', (request, response) => {
             {name: "A Propos", url: ""},
             {name: "Contact", url: ""},
             {name: "Projets", url: ""}
+        ],
+        contentSections: [
+            {
+                title: "Services",
+                contentSectionBlocks: [
+                    {
+                        img: "assets/Logo.ai",
+                        title: "Devis de travaux",
+                        description: "Venez faire votre devis ici"
+                    },
+                    {
+                        img: "assets/Logo.ai",
+                        title: "Architecture",
+                        description: "Nous avons des architectes."
+                    },
+                    {
+                        img: "assets/Logo.ai",
+                        title: "Gestion de chantier",
+                        description: "Venez confirmer la vrai gestion de chantier"
+                    }
+                ]
+            }
         ]
     });
 });

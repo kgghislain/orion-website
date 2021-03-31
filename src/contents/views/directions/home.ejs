@@ -9,6 +9,12 @@
 
 <body>
     <%- include('../component/header', {menuBarItems: menuBarItems}) %>
+
+    <% if (contentSections) { %>
+        <%- include('../component/content-with-content-section', contentSections) %>
+    <% } %>
+
+    <%- include('../component/footer') %>
 </body>
 
 </html>

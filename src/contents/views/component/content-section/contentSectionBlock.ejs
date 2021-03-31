@@ -1,0 +1,23 @@
+<%# Needs: contentSectionBlock = {img, title, description}%>
+
+<div class="cl-content-section-block">
+    <% if (contentSectionBlock.img) { %>
+    <div class="cl-content-section-block-div-img">
+        <img src="<%= contentSectionBlock.img%>">
+    </div>
+    <%}%>
+    <% if (contentSectionBlock.title) { %>
+    <div class="cl-content-section-block-div-title">
+        <h3>
+            <%= contentSectionBlock.title %>
+        </h3>
+    </div>
+    <%}%>
+    <% if (contentSectionBlock.description) { %>
+    <div class="cl-content-section-block-div-description">
+        <p>
+            <%= contentSectionBlock.description %>
+        </p>
+    </div>
+    <%}%>
+</div>

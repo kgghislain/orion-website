@@ -1,0 +1,10 @@
+<%# Needs: contentSection = {title, [contentSectionBlocks = {img, title, description}]} %>
+
+<div class="cl-content-section">
+    <h1><%= contentSection.title %></h1>
+    <div class="cl-content-section-div">
+        <% contentSection.contentSectionBlocks.forEach( function(contentSectionBlock) { %>
+            <%- include('contentSectionBlock', {contentSectionBlock, contentSectionBlock}) %>
+        <% }) %>
+    </div>
+</div>
