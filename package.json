@@ -1,0 +1,22 @@
+{
+  "name": "orion-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kgghislain/orion-website.git"
+  },
+  "author": "Ghislain Kengne Gumete & Fodop Gumete Pierre Gabin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kgghislain/orion-website/issues"
+  },
+  "homepage": "https://github.com/kgghislain/orion-website#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
