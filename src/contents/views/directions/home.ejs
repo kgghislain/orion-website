@@ -1,4 +1,4 @@
-<%# Needs : menuBarItems = [{name, url}] %>
+<%# Needs : menuBar = MenuBar %>
 
 <!DOCTYPE html>
 <html>
@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <%- include('../component/header', {menuBarItems: menuBarItems}) %>
+    <%- include('../component/header', {menuBar: menuBar}) %>
 
     <% if (contentSections) { %>
         <%- include('../component/content-with-content-section', contentSections) %>

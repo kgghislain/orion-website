@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
+var ContentSection = require('./src/contentsmanagement/contentSection');
+var MenuBar = require('./src/contentsmanagement/menuBar');
+
 // var db = new require('./src/database/pghandler.js');
 // db.connect();
 
@@ -14,50 +17,37 @@ app.set('provides', './src/contents/provides');
 console.log("Server is starting ... ");
 
 app.get('/', (request, response) => {
+    var menuBar = new MenuBar();
+    menuBar.addItem("Acceuil");
+    menuBar.addItem("Services");
+    menuBar.addItem("A Propos");
+    menuBar.addItem("Contact");
+    menuBar.addItem("Projets");
+
+    var contentSectionServices = new ContentSection("Services");
+    contentSectionServices.addBlock(
+        "assets/Logo.ai",
+        "Devis de travaux",
+        "Venez faire votre devis ici");
+    contentSectionServices.addBlock(
+        "assets/Logo.ai",
+        "Architecture",
+        "Nous avons des architectes.");
+    contentSectionServices.addBlock(
+        "assets/Logo.ai",
+        "Gestion de chantier",
+        "Venez confirmer la vrai gestion de chantier");
+    var contentSectionContact = new ContentSection("Contact us");
+    contentSectionContact.addBlockContact(
+        "/contact",
+        "POST",
+        "Nous contacter",
+        "Veuillez nous envoyer un message pour toute demande de devis ou d'information");
     response.render('directions/home', {
-        menuBarItems: [
-            {name: "Acceuil", url: ""},
-            {name: "Services", url: ""},
-            {name: "A Propos", url: ""},
-            {name: "Contact", url: ""},
-            {name: "Projets", url: ""}
-        ],
+        menuBar: menuBar,
         contentSections: [
-            {
-                title: "Services",
-                contentSectionBlocks: [
-                    {
-                        type: "block",
-                        img: "assets/Logo.ai",
-                        title: "Devis de travaux",
-                        description: "Venez faire votre devis ici"
-                    },
-                    {
-                        type: "block",
-                        img: "assets/Logo.ai",
-                        title: "Architecture",
-                        description: "Nous avons des architectes."
-                    },
-                    {
-                        type: "block",
-                        img: "assets/Logo.ai",
-                        title: "Gestion de chantier",
-                        description: "Venez confirmer la vrai gestion de chantier"
-                    }
-                ]
-            },
-            {
-                title: "blockContact",
-                contentSectionBlocks: [
-                    {
-                        type: "blockContact",
-                        action: "/contact",
-                        method: "POST",
-                        title: "Nous contacter",
-                        description: "Veuillez nous envoyer un message pour toute demande de devis ou d'information"
-                    }
-                ]
-            }
+            contentSectionServices,
+            contentSectionContact
         ]
     });
 });

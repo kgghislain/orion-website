@@ -21,6 +21,9 @@ main.js is the entry point of the server. It calls functions and middleware avai
 1. contents
 This directory contents the necessary ejs code to generate every web pages the server will return to a web browser.
 
-2. database
+2. contentsmanagement
+This directory contents types used in ejs views.
+
+3. database
 This directory contents the pghandler.js file. That file contains all functions to communicate with the PostgresSql data base.
 In the same directory, we have the *queries/* directory which contains javascript abstractions for every single SQL request performed in pghandler.js.
