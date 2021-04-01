@@ -6,24 +6,69 @@ function ContentSectionBlock (img, title, description) {
     this.description = description;
 };
 
-function ContentSectionBlockContact (action, method, title, description) {
+/**
+ * type can be any type that the html <input> tag can take as type.
+ * Plus a textarea type.
+ */
+function ContentSectionBlockFormInput (name, type, label) {
+    this.name = name;
+    this.type = type;
+    this.label = label;
+};
+
+/**
+ * @param {string} action
+ * @param {string} method
+ * @param {string} title
+ * @param {string} description
+ * @param {string} submitName
+ */
+function ContentSectionBlockForm (action, method, title, description, submitName) {
     this.type = "blockContact";
     this.action = action;
     this.method = method;
     this.title = title;
     this.description = description;
+    this.submitName = submitName;
+    this.inputs = [];
+
+    /**
+     * @param {ContentSectionBlockFormInput[]} inputs
+     */
+    this.setInputs = function (inputs_) {
+        this.inputs = inputs_;
+    }
+    /**
+     * @param {ContentSectionBlockFormInput} input
+     */
+    this.addInput = function (input) {
+        this.inputs.push(input);
+    }
 };
 
-function ContentSection (title) {
+/**
+ * @param {string} title
+ * @param {string} id
+ */
+function ContentSection (title, id) {
     this.title = title;
+    this.id = id;
     this.contentSectionBlocks = [];
 
+    /**
+     * @param {string} String
+     * @param {string} Str
+     * @param {string} description
+    */
     this.addBlock = function (img, title, description) {
         this.contentSectionBlocks.push(new ContentSectionBlock(img, title, description));
     }
-    this.addBlockContact = function (action, method, title, description) {
-        this.contentSectionBlocks.push(new ContentSectionBlockContact(action, method, title, description));
+    /**
+     * @param {ContentSectionBlockForm} blockForm
+     */
+    this.addBlockForm = function (blockForm) {
+        this.contentSectionBlocks.push(blockForm);
     }
 };
 
-module.exports = ContentSection;
+module.exports = {ContentSection, ContentSectionBlockForm, ContentSectionBlockFormInput};

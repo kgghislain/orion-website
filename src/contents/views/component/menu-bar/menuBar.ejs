@@ -1,12 +1,14 @@
 <%# Needs : menuBar = MenuBar} %>
 
-<div id="id-menubar">
+<nav class="cl-menubar-nav navbar navbar-expand-lg navbar-dark bg-dark" style="position: fixed; top: 0%; width: 100%; height: 17%; z-index: 99;">
     <%- include('menuBarHome') %>
-    <nav id="id-menubar-nav">
 
-        <% menuBar.menuBarItems.forEach( function(menuBarItem) { %>
-            <%- include('menuBarItem', {menuBarItem: menuBarItem}); %>
-        <% }); %>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+            <% menuBar.menuBarItems.forEach( function(menuBarItem) { %>
+                <%- include('menuBarItem', {menuBarItem: menuBarItem}); %>
+            <% }); %>
+        </ul>
+    </div>
 
-    </nav>
-</div>
+</nav>

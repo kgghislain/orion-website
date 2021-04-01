@@ -1,21 +1,21 @@
 <%# Needs: contentSectionBlock = ContentSectionBlock%>
 
-<div class="cl-content-section-block">
+<div class="cl-content-section-block card"
+    style="
+        width: 20%;
+        height: 30%;
+    ">
     <% if (contentSectionBlock.img) { %>
-    <div class="cl-content-section-block-div-img">
-        <img src="<%= contentSectionBlock.img%>">
-    </div>
+        <img src="<%= contentSectionBlock.img%>" style="width: 100%; height: auto;">
     <%}%>
     <% if (contentSectionBlock.title) { %>
-    <div class="cl-content-section-block-div-title">
-        <h3>
-            <%= contentSectionBlock.title %>
-        </h3>
-    </div>
+    <h3 class="card-header">
+        <%= contentSectionBlock.title %>
+    </h3>
     <%}%>
     <% if (contentSectionBlock.description) { %>
-    <div class="cl-content-section-block-div-description">
-        <p>
+    <div class="cl-content-section-block-div-description card-body">
+        <p class="card-text">
             <%= contentSectionBlock.description %>
         </p>
     </div>

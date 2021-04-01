@@ -1,48 +1,87 @@
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser');
+//var bodyParser = require('body-parser');
 
-var ContentSection = require('./src/contentsmanagement/contentSection');
-var MenuBar = require('./src/contentsmanagement/menuBar');
+var {
+    ContentSection,
+    ContentSectionBlockForm,
+    ContentSectionBlockFormInput
+} = require('./src/contentsmanagement/contentSection');
+var {
+    MenuBar,
+    MenuBarItem
+} = require('./src/contentsmanagement/menuBar');
 
 // var db = new require('./src/database/pghandler.js');
 // db.connect();
 
 app.set('view engine', 'ejs');
-// Link the ./src/contents/provides directory to provides/ name 
-app.use('./src/contents/provides', express.static('provides'));
 app.set('views', './src/contents/views');
-app.set('provides', './src/contents/provides');
+app.use("/provides", express.static("./src/contents/provides"));
 
 console.log("Server is starting ... ");
 
 app.get('/', (request, response) => {
     var menuBar = new MenuBar();
-    menuBar.addItem("Acceuil");
-    menuBar.addItem("Services");
-    menuBar.addItem("A Propos");
-    menuBar.addItem("Contact");
-    menuBar.addItem("Projets");
+    menuBar.addItem(new MenuBarItem("Acceuil", "/", true));
+    menuBar.addItem(new MenuBarItem("Services", "#id-services", false));
+    menuBar.addItem(new MenuBarItem("A Propos", "#", false));
+    menuBar.addItem(new MenuBarItem("Projets", "#", false));
+    menuBar.addItem(new MenuBarItem("Contact", "#id-contact", false));
 
-    var contentSectionServices = new ContentSection("Services");
+    var contentSectionServices = new ContentSection("Services", "id-services");
     contentSectionServices.addBlock(
-        "assets/Logo.ai",
+        "/provides/assets/Logo.ai",
         "Devis de travaux",
         "Venez faire votre devis ici");
     contentSectionServices.addBlock(
-        "assets/Logo.ai",
+        "/provides/assets/gurren_lagann.jpg",
         "Architecture",
         "Nous avons des architectes.");
     contentSectionServices.addBlock(
-        "assets/Logo.ai",
+        "/provides/assets/Logo.ai",
         "Gestion de chantier",
         "Venez confirmer la vrai gestion de chantier");
-    var contentSectionContact = new ContentSection("Contact us");
-    contentSectionContact.addBlockContact(
+    var contentSectionContact = new ContentSection("Contact us", "id-contact");
+    var contactBlock = new ContentSectionBlockForm(
         "/contact",
-        "POST",
+        "post",
         "Nous contacter",
-        "Veuillez nous envoyer un message pour toute demande de devis ou d'information");
+        "Veuillez nous envoyer un message pour toute demande de devis ou d'information",
+        "Emvoyer")
+
+    contactBlock.addInput(
+        new ContentSectionBlockFormInput(
+            "prenom",
+            "text",
+            "Prenom")
+    )
+    contactBlock.addInput(
+        new ContentSectionBlockFormInput(
+            "nom",
+            "text",
+            "Nom")
+    )
+    contactBlock.addInput(
+        new ContentSectionBlockFormInput(
+            "email",
+            "email",
+            "Email")
+    )
+    contactBlock.addInput(
+        new ContentSectionBlockFormInput(
+            "phone",
+            "Number",
+            "Telephone")
+    )
+    contactBlock.addInput(
+        new ContentSectionBlockFormInput(
+            "message",
+            "textarea",
+            "Message")
+    )
+    contentSectionContact.addBlockForm(contactBlock);
+
     response.render('directions/home', {
         menuBar: menuBar,
         contentSections: [

@@ -1,8 +1,21 @@
-
 <%# Needs : menuBarItem = MenuBarItem %>
 
-<div class="cl-menubar-nav-link">
-    <a href="<%= menuBarItem.url %>">
-        <%= menuBarItem.name %>
-    </a>
-</div>
+<li class="cl-menubar-item nav-item <% if (menuBarItem.active == 0) { %> active <% } %>" >
+    <% if (menuBarItem.subMenuItems.lenght > 0) { %>
+        <a href="#" class="nav-link dropdown-toggle">
+            <%= menuBarItem.name %>
+        </a>
+
+        <div class="dropdown-menu">
+            <% menuBarItem.subMenuItems.forEach( function(subItem) { %>
+                <a class="dropdown-item" href="<%= subItem.url %>">
+                    <%= subItem.name %>
+                </a>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <a href="<%= menuBarItem.url %>" class="nav-link">
+            <%= menuBarItem.name %>
+        </a>
+    <% } %>
+</li>
