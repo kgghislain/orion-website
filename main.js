@@ -48,38 +48,38 @@ app.get('/', (request, response) => {
         "post",
         "Nous contacter",
         "Veuillez nous envoyer un message pour toute demande de devis ou d'information",
-        "Emvoyer")
+        "Emvoyer");
 
     contactBlock.addInput(
         new ContentSectionBlockFormInput(
             "prenom",
             "text",
             "Prenom")
-    )
+    );
     contactBlock.addInput(
         new ContentSectionBlockFormInput(
             "nom",
             "text",
             "Nom")
-    )
+    );
     contactBlock.addInput(
         new ContentSectionBlockFormInput(
             "email",
             "email",
             "Email")
-    )
+    );
     contactBlock.addInput(
         new ContentSectionBlockFormInput(
             "phone",
             "Number",
             "Telephone")
-    )
+    );
     contactBlock.addInput(
         new ContentSectionBlockFormInput(
             "message",
             "textarea",
             "Message")
-    )
+    );
     contentSectionContact.addBlockForm(contactBlock);
 
     response.render('directions/home', {
