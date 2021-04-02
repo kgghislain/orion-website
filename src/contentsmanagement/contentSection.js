@@ -1,9 +1,11 @@
 
-function ContentSectionBlock (img, title, description) {
+function ContentSectionBlock (img, title, description, width, height) {
     this.type = "block";
     this.img = img;
     this.title = title;
     this.description = description;
+    this.width = width;
+    this.height = height;
 };
 
 /**
@@ -59,9 +61,13 @@ function ContentSection (title, id) {
      * @param {string} String
      * @param {string} Str
      * @param {string} description
+     * @param {number} width
+     * @param {number} height
     */
-    this.addBlock = function (img, title, description) {
-        this.contentSectionBlocks.push(new ContentSectionBlock(img, title, description));
+    this.addBlock = function (img, title, description, width, height) {
+        this.contentSectionBlocks.push(
+            new ContentSectionBlock(img, title, description, width, height)
+        );
     }
     /**
      * @param {ContentSectionBlockForm} blockForm

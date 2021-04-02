@@ -1,6 +1,11 @@
 <%# Needs: contentSection = ContentSection%>
 
-<div id="id-content">
+<div id="id-content"
+    style="
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    ">
     <% contentSections.forEach( function (contentSection) { %>
         <%- include('content-section/contentSection', {contentSection: contentSection}) %>
     <% }) %>

@@ -2,8 +2,12 @@
 
 <div class="cl-content-section-block card"
     style="
-        width: 20%;
-        height: 30%;
+        <% if (contentSectionBlock.width) { %>
+            max-width: <%= contentSectionBlock.width %>%;
+        <% } %>
+        <% if (contentSectionBlock.height) { %>
+            max-height: <%= contentSectionBlock.height %>%;
+        <% } %>
     ">
     <% if (contentSectionBlock.img) { %>
         <img src="<%= contentSectionBlock.img%>" style="width: 100%; height: auto;">

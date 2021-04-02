@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 //var bodyParser = require('body-parser');
 
+var TEXT = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus rerum praesentium alias libero officia fugiat qui, molestias nam sunt quasi ut commodi molestiae pariatur tempore reiciendis mollitia doloremque dicta dolore.";
+
 var {
     ContentSection,
     ContentSectionBlockForm,
@@ -31,17 +33,20 @@ app.get('/', (request, response) => {
 
     var contentSectionServices = new ContentSection("Services", "id-services");
     contentSectionServices.addBlock(
-        "/provides/assets/Logo.ai",
+        undefined,
         "Devis de travaux",
-        "Venez faire votre devis ici");
+        "Venez faire votre devis ici",
+        30);
     contentSectionServices.addBlock(
         "/provides/assets/gurren_lagann.jpg",
         "Architecture",
-        "Nous avons des architectes.");
+        "Nous avons des architectes.",
+        30);
     contentSectionServices.addBlock(
-        "/provides/assets/Logo.ai",
+        undefined,
         "Gestion de chantier",
-        "Venez confirmer la vrai gestion de chantier");
+        "Venez confirmer la vrai gestion de chantier",
+        30);
     var contentSectionContact = new ContentSection("Contact us", "id-contact");
     var contactBlock = new ContentSectionBlockForm(
         "/contact",
@@ -82,10 +87,14 @@ app.get('/', (request, response) => {
     );
     contentSectionContact.addBlockForm(contactBlock);
 
+    var contentSectionText = new ContentSection("A Propos", "id-apropos");
+    contentSectionText.addBlock(undefined, undefined, TEXT, 100);
+
     response.render('directions/home', {
         menuBar: menuBar,
         contentSections: [
             contentSectionServices,
+            contentSectionText,
             contentSectionContact
         ]
     });
