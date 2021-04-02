@@ -1,20 +1,20 @@
 <%# Needs : menuBarItem = MenuBarItem %>
 
-<li class="nav-item <% if (menuBarItem.active == 0) { %> active <% } %>" >
+<li class="menu-bar-directions-li" >
     <% if (menuBarItem.subMenuItems.lenght > 0) { %>
-        <a href="#" class="nav-link dropdown-toggle hoverable-text">
+        <a href="#" class="<% if (menuBarItem.active == 0) { %>current<% } %>">
             <%= menuBarItem.name %>
         </a>
 
-        <div class="dropdown-menu">
+        <div class="">
             <% menuBarItem.subMenuItems.forEach( function(subItem) { %>
-                <a class="dropdown-item hoverable-text" href="<%= subItem.url %>">
+                <a class="" href="<%= subItem.url %>">
                     <%= subItem.name %>
                 </a>
             <% }) %>
         </div>
     <% } else { %>
-        <a href="<%= menuBarItem.url %>" class="hoverable-text nav-link">
+        <a href="<%= menuBarItem.url %>" class="<% if (menuBarItem.active == 0) { %>current<% } %>">
             <%= menuBarItem.name %>
         </a>
     <% } %>

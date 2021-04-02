@@ -1,18 +1,7 @@
 <%# Needs: contentSection = ContentSection%>
-<div id="<%= contentSection.id %>" class="cl-content-section"
-    style="
-        margin-top: 10%;
-        margin-left: 5%; margin-right: 5%;
-        align-self: flex-start;
-    ">
-    <h1 style="text-align: center;"><u><%= contentSection.title %></u></h1>
-    <div class="cl-content-section-div"
-        style="
-            margin-top: 5%; margin-left: 5%; margin-right: 5%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        ">
+<div id="<%= contentSection.id %>" class="content-section">
+    <h1 class="content-section-title"><%= contentSection.title %></h1>
+    <div class="content-section-body-div">
         <% contentSection.contentSectionBlocks.forEach( function(contentSectionBlock) { %>
             <% if (contentSectionBlock.type == "block") { %>
                 <%- include('contentSectionBlock', {contentSectionBlock : contentSectionBlock}) %>

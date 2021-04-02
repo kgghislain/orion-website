@@ -5,10 +5,14 @@
 
 <head>
     <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="/provides/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/provides/css/menuBar.css">
+    <link rel="stylesheet" type="text/css" href="/provides/css/contentSection.css">
 </head>
 
-<body>
+<body 
+    style="
+        margin: 0;
+    ">
 
     <img src="/provides/assets/background.gif"
         style="
@@ -16,12 +20,12 @@
             position: fixed; top: 0%; z-index: -10;
         ">
 
+    <%- include('../component/header', {menuBar: menuBar}) %>
+
     <div
         style="
             margin-top: 50%;
         ">
-
-    <%- include('../component/header', {menuBar: menuBar}) %>
 
     <% if (contentSections) { %>
         <%- include('../component/content-with-content-section', contentSections) %>

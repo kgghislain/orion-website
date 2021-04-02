@@ -1,13 +1,13 @@
 <%# Needs: contentSectionBlockForm = ContentSectionBlockForm %>
 
-<div class="cl-content-section-block-form card">
+<div class="content-section-block">
 
-    <h5 class="card-header">
+    <h3 class="">
         <%= contentSectionBlockForm.title %>
-    </h5>
+    </h3>
 
-    <div class="cl-content-section-block-form-div-description card-body">
-        <p class="card-text">
+    <div class="">
+        <p class="">
             <%= contentSectionBlockForm.description %>
         </p>
     </div>
@@ -15,16 +15,16 @@
     <form 
         action="<%= contentSectionBlockForm.action %>"
         method="<%= contentSectionBlockForm.method %>"
-        class="cl-content-section-block-form-form card-body">
+        class="content-section-block-form">
 
         <% contentSectionBlockForm.inputs.forEach( function (input) {%>
             <% if (input.type == "textarea") {%>
-                <div class="cl-content-section-block-form-form-div-item form-group">
+                <div class="">
                     <label><%= input.label%></label>
                     <textarea name="<%= input.name %>" class="form-control" rows="10"></textarea>
                 </div>
             <% } else {%>
-                <div class="cl-content-section-block-form-form-div-item form-group">
+                <div class="">
                     <label for="<%= input.name %>"><%= input.label %></label>
                     <input name="<%= input.name %>" type="<%= input.type %>" class="form-control">
                 </div>

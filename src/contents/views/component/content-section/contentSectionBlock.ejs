@@ -1,6 +1,6 @@
 <%# Needs: contentSectionBlock = ContentSectionBlock%>
 
-<div class="cl-content-section-block card"
+<div class="content-section-block"
     style="
         <% if (contentSectionBlock.width) { %>
             max-width: <%= contentSectionBlock.width %>%;
@@ -9,17 +9,20 @@
             max-height: <%= contentSectionBlock.height %>%;
         <% } %>
     ">
+
     <% if (contentSectionBlock.img) { %>
-        <img src="<%= contentSectionBlock.img%>" style="width: 100%; height: auto;">
+        <img src="<%= contentSectionBlock.img%>">
     <%}%>
+    
     <% if (contentSectionBlock.title) { %>
-    <h3 class="card-header">
+    <h3 class="">
         <%= contentSectionBlock.title %>
     </h3>
     <%}%>
+    
     <% if (contentSectionBlock.description) { %>
-    <div class="cl-content-section-block-div-description card-body">
-        <p class="card-text">
+    <div class="">
+        <p class="">
             <%= contentSectionBlock.description %>
         </p>
     </div>

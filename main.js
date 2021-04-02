@@ -88,7 +88,7 @@ app.get('/', (request, response) => {
     contentSectionContact.addBlockForm(contactBlock);
 
     var contentSectionText = new ContentSection("A Propos", "id-apropos");
-    contentSectionText.addBlock(undefined, undefined, TEXT, 100);
+    contentSectionText.addBlock(undefined, undefined, TEXT);
 
     response.render('directions/home', {
         menuBar: menuBar,

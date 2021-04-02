@@ -1,0 +1,74 @@
+/*The section (div)*/
+.content-section {
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/*The title (h1)*/
+.content-section-title {
+    text-align: center;
+    color: #0c283d;
+    text-transform: uppercase;
+    font-family: sans-serif;
+
+    text-decoration: underline;
+    text-decoration-color: #f7ba32;
+    text-decoration-thickness: 25%;
+    text-underline-offset: 50%;
+}
+
+/*The body (div)*/
+.content-section-body-div {
+    padding: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/*Block*/
+.content-section-block {
+    /*(div)*/
+    background-color: #eee;
+    margin: 2%;
+
+    display: flex;
+    flex-direction: column;
+}
+.content-section-block > img {
+    /*(image)*/
+    width: 100%;
+}
+.content-section-block > h3 {
+    /*(block title)*/
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #0c283d;
+}
+.content-section-block > div {
+    /*(block text container)*/
+    padding: 2%;
+
+    font-family: sans-serif;
+}
+
+/*block form*/
+.content-section-block-form > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-right: 1%; margin-left: 1%;
+    margin-bottom: 2%;
+}
+.content-section-block-form > button {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #0c283d;
+    
+    border: 0px;
+    padding: 2%;
+    background-color: #f7ba32;
+}
