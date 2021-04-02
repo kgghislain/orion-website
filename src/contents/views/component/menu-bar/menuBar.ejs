@@ -4,6 +4,10 @@
     <%- include('menuBarHome') %>
 
     <div class="menu-bar-directions-div">
+        <button class="menu-bar-button">
+            ...
+        </button>
+
         <ul class="menu-bar-directions-ul">
             <% menuBar.menuBarItems.forEach( function(menuBarItem) { %>
                 <%- include('menuBarItem', {menuBarItem: menuBarItem}); %>
