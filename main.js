@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
-//var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
+var nodeMailer = require('nodemailer');
 
 var TEXT = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus rerum praesentium alias libero officia fugiat qui, molestias nam sunt quasi ut commodi molestiae pariatur tempore reiciendis mollitia doloremque dicta dolore.";
 
@@ -13,9 +14,6 @@ var {
     MenuBar,
     MenuBarItem
 } = require('./src/contentsmanagement/menuBar');
-
-// var db = new require('./src/database/pghandler.js');
-// db.connect();
 
 app.set('view engine', 'ejs');
 app.set('views', './src/contents/views');
@@ -100,8 +98,39 @@ app.get('/', (request, response) => {
     });
 });
 
+app.use('/contact', bodyParser.urlencoded({extended: true}));
+app.use('/contact', bodyParser.json());
 app.post('/contact', (request, response) => {
-    response.redirect('/');
+    var transporter = nodeMailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'gumeteapps@gmail.com',
+            pass: ''
+        }
+    });
+    var mailOptions = {
+        from: 'gumeteapps@gmail.com',
+        to: 'gumeteapps@gmail.com',
+        subject: 'Message de '+ request.body.nom,
+        text:
+            "From : " + request.body.nom + " " + request.body.prenom + "\n" + 
+            "Telephone : " + request.body.phone + "\n" + 
+            "Email: " + request.body.email + 
+            "\n" + 
+            request.body.message
+    };
+    transporter.sendMail(
+        mailOptions,
+        function (error, info) {
+            if(error) {
+                console.log(error);
+            }
+            else {
+                console.log("Email sent : ");
+            }
+        }
+    );
+    response.redirect('/#id-contact');
 });
 
 let port = process.env.PORT;
