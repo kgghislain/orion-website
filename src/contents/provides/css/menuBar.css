@@ -67,6 +67,12 @@
 }
 
 @media (max-width: 800px) {
+    .menu-bar-home {
+        background-color: white;
+        width: 40%;
+        height: 100%;
+    }
+
     .menu-bar-directions-ul {
         display: none;
     }

@@ -1,6 +1,14 @@
 <%# Needs: contentSection = ContentSection%>
-<div id="<%= contentSection.id %>" class="content-section">
+<div 
+    <% if (contentSection.id) { %>
+    id="<%= contentSection.id %>"
+    <% } %>
+
+    class="content-section">
+    
+    <% if (contentSection.title) { %>
     <h1 class="content-section-title"><%= contentSection.title %></h1>
+    <% } %>
     <div class="content-section-body-div">
         <% contentSection.contentSectionBlocks.forEach( function(contentSectionBlock) { %>
             <% if (contentSectionBlock.type == "block") { %>
