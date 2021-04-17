@@ -24,10 +24,16 @@ console.log("Server is starting ... ");
 app.get('/', (request, response) => {
     var menuBar = new MenuBar();
     menuBar.addItem(new MenuBarItem("Acceuil", "/", true));
-    menuBar.addItem(new MenuBarItem("Services", "#id-services", false));
-    menuBar.addItem(new MenuBarItem("A Propos", "#", false));
-    menuBar.addItem(new MenuBarItem("Projets", "#", false));
-    menuBar.addItem(new MenuBarItem("Contact", "#id-contact", false));
+    menuBar.addItem(new MenuBarItem("Services", "/services", false));
+    menuBar.addItem(new MenuBarItem("Qui somme nous ?", "/presentation", false));
+    menuBar.addItem(new MenuBarItem("Contact", "/contact", false));
+    menuBar.addItem(new MenuBarItem("Nos projets", "/projects", false));
+    // var menuItemProjects = new MenuBarItem("Projets", "#", false);
+    // menuItemProjects.addSubMenuItem("Services", "#");
+    // menuItemProjects.addSubMenuItem("Services", "#");
+    // menuItemProjects.addSubMenuItem("Services", "#");
+    // menuItemProjects.addSubMenuItem("Services", "#");
+    // menuItemProjects.addSubMenuItem("Services", "#");
 
     var contentSectionServices = new ContentSection("Services", "id-services");
     contentSectionServices.addBlock(
@@ -45,14 +51,68 @@ app.get('/', (request, response) => {
         "Gestion de chantier",
         "Venez confirmer la vrai gestion de chantier",
         30);
-    var contentSectionContact = new ContentSection("Contact us", "id-contact");
+
+    var contentSectionText = new ContentSection("A Propos", "id-apropos");
+    contentSectionText.addBlock(undefined, undefined, TEXT);
+
+    response.render('directions/home', {
+        menuBar: menuBar,
+        contentSections: [
+            contentSectionText
+        ]
+    });
+});
+
+app.use('/contactform', bodyParser.urlencoded({extended: true}));
+app.use('/contactform', bodyParser.json());
+app.post('/contactform', (request, response) => {
+    var transporter = nodeMailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'gumeteapps@gmail.com',
+            pass: ''
+        }
+    });
+    var mailOptions = {
+        from: 'gumeteapps@gmail.com',
+        to: 'gumeteapps@gmail.com',
+        subject: 'Message de '+ request.body.nom,
+        text:
+            "From : " + request.body.nom + " " + request.body.prenom + "\n" + 
+            "Telephone : " + request.body.phone + "\n" + 
+            "Email: " + request.body.email + 
+            "\n" + 
+            request.body.message
+    };
+    transporter.sendMail(
+        mailOptions,
+        function (error, info) {
+            if(error) {
+                console.log(error);
+            }
+            else {
+                console.log("Email sent : ");
+            }
+        }
+    );
+    response.redirect('/#id-contact');
+});
+
+app.get('/contact', (request, response) => {
+    var menuBar = new MenuBar();
+    menuBar.addItem(new MenuBarItem("Acceuil", "/", false));
+    menuBar.addItem(new MenuBarItem("Services", "/services", false));
+    menuBar.addItem(new MenuBarItem("Qui somme nous ?", "/presentation", false));
+    menuBar.addItem(new MenuBarItem("Contact", "/contact", true));
+    menuBar.addItem(new MenuBarItem("Nos projets", "/projects", false));
+
+    var contentSectionContact = new ContentSection("Nous contacter", "id-contact");
     var contactBlock = new ContentSectionBlockForm(
-        "/contact",
+        "/contactform",
         "post",
         "Nous contacter",
         "Veuillez nous envoyer un message pour toute demande de devis ou d'information",
         "Emvoyer");
-
     contactBlock.addInput(
         new ContentSectionBlockFormInput(
             "prenom",
@@ -85,53 +145,70 @@ app.get('/', (request, response) => {
     );
     contentSectionContact.addBlockForm(contactBlock);
 
-    var contentSectionText = new ContentSection("A Propos", "id-apropos");
-    contentSectionText.addBlock(undefined, undefined, TEXT);
-
-    response.render('directions/home', {
+    response.render('directions/contact', {
         menuBar: menuBar,
         contentSections: [
-            contentSectionServices,
-            contentSectionText,
             contentSectionContact
         ]
     });
-});
+})
 
-app.use('/contact', bodyParser.urlencoded({extended: true}));
-app.use('/contact', bodyParser.json());
-app.post('/contact', (request, response) => {
-    var transporter = nodeMailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'gumeteapps@gmail.com',
-            pass: ''
-        }
+app.get('/presentation', (request, response) => {
+    var menuBar = new MenuBar();
+    menuBar.addItem(new MenuBarItem("Acceuil", "/", false));
+    menuBar.addItem(new MenuBarItem("Services", "/services", false));
+    menuBar.addItem(new MenuBarItem("Qui somme nous ?", "/presentation", true));
+    menuBar.addItem(new MenuBarItem("Contact", "/contact", false));
+    menuBar.addItem(new MenuBarItem("Nos projets", "/projects", false));
+
+    var contentSectionText = new ContentSection("A Propos", "id-apropos");
+    contentSectionText.addBlock(undefined, undefined, TEXT);
+
+    response.render('directions/presentation', {
+        menuBar: menuBar,
+        contentSections: [
+            contentSectionText
+        ]
     });
-    var mailOptions = {
-        from: 'gumeteapps@gmail.com',
-        to: 'gumeteapps@gmail.com',
-        subject: 'Message de '+ request.body.nom,
-        text:
-            "From : " + request.body.nom + " " + request.body.prenom + "\n" + 
-            "Telephone : " + request.body.phone + "\n" + 
-            "Email: " + request.body.email + 
-            "\n" + 
-            request.body.message
-    };
-    transporter.sendMail(
-        mailOptions,
-        function (error, info) {
-            if(error) {
-                console.log(error);
-            }
-            else {
-                console.log("Email sent : ");
-            }
-        }
-    );
-    response.redirect('/#id-contact');
-});
+})
+
+app.get('/projects', (request, response) => {
+    var menuBar = new MenuBar();
+    menuBar.addItem(new MenuBarItem("Acceuil", "/", false));
+    menuBar.addItem(new MenuBarItem("Services", "/services", false));
+    menuBar.addItem(new MenuBarItem("Qui somme nous ?", "/presentation", false));
+    menuBar.addItem(new MenuBarItem("Contact", "/contact", false));
+    menuBar.addItem(new MenuBarItem("Nos projets", "/projects", true));
+
+    var contentSectionText = new ContentSection("A Propos", "id-apropos");
+    contentSectionText.addBlock(undefined, undefined, TEXT);
+
+    response.render('directions/projects', {
+        menuBar: menuBar,
+        contentSections: [
+            contentSectionText
+        ]
+    });
+})
+
+app.get('/services', (request, response) => {
+    var menuBar = new MenuBar();
+    menuBar.addItem(new MenuBarItem("Acceuil", "/", false));
+    menuBar.addItem(new MenuBarItem("Services", "/services", true));
+    menuBar.addItem(new MenuBarItem("Qui somme nous ?", "/presentation", false));
+    menuBar.addItem(new MenuBarItem("Contact", "/contact", false));
+    menuBar.addItem(new MenuBarItem("Nos projets", "/projects", false));
+
+    var contentSectionText = new ContentSection("A Propos", "id-apropos");
+    contentSectionText.addBlock(undefined, undefined, TEXT);
+
+    response.render('directions/services', {
+        menuBar: menuBar,
+        contentSections: [
+            contentSectionText
+        ]
+    });
+})
 
 let port = process.env.PORT;
 if(port == null || port == "") {

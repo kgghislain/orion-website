@@ -1,21 +1,17 @@
 <%# Needs : menuBarItem = MenuBarItem %>
 
 <li class="menu-bar-directions-li" >
-    <% if (menuBarItem.subMenuItems.lenght > 0) { %>
-        <a href="#" class="<% if (menuBarItem.active == 0) { %>current<% } %>">
-            <%= menuBarItem.name %>
-        </a>
-
-        <div class="">
-            <% menuBarItem.subMenuItems.forEach( function(subItem) { %>
+    <a href="<%= menuBarItem.url %>" class="<% if (menuBarItem.active == 0) { %>current<% } %>">
+        <%= menuBarItem.name %>
+    </a>
+    
+    <ul class="menu-bar-directions-li-suditem-div">
+        <% menuBarItem.subMenuItems.forEach( function(subItem) { %>
+            <li>
                 <a class="" href="<%= subItem.url %>">
                     <%= subItem.name %>
                 </a>
-            <% }) %>
-        </div>
-    <% } else { %>
-        <a href="<%= menuBarItem.url %>" class="<% if (menuBarItem.active == 0) { %>current<% } %>">
-            <%= menuBarItem.name %>
-        </a>
-    <% } %>
+            </li>
+        <% }) %>
+    </ul>
 </li>
