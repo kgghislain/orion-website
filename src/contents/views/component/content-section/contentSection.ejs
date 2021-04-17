@@ -7,7 +7,7 @@
     class="content-section">
     
     <% if (contentSection.title) { %>
-    <h1 class="content-section-title"><%= contentSection.title %></h1>
+    <h1 class="content-section-title"><%- contentSection.title %></h1>
     <% } %>
     <div class="content-section-body-div">
         <% contentSection.contentSectionBlocks.forEach( function(contentSectionBlock) { %>

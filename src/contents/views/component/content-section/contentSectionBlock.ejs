@@ -18,10 +18,10 @@
     <h3 class="">
         <% if (contentSectionBlock.url) { %>
             <a href="<%= contentSectionBlock.url %>">
-                <%= contentSectionBlock.title %>
+                <%- contentSectionBlock.title %>
             </a>
         <% } else { %>
-            <%= contentSectionBlock.title %>
+            <%- contentSectionBlock.title %>
         <%}%>
     </h3>
     <%}%>
@@ -29,7 +29,7 @@
     <% if (contentSectionBlock.description) { %>
     <div class="">
         <p class="">
-            <%= contentSectionBlock.description %>
+            <%- contentSectionBlock.description %>
         </p>
     </div>
     <%}%>
