@@ -134,7 +134,7 @@ app.get('/contact', (request, response) => {
     contactBlock.addInput(
         new ContentSectionBlockFormInput(
             "phone",
-            "Number",
+            "tel",
             "Telephone")
     );
     contactBlock.addInput(
