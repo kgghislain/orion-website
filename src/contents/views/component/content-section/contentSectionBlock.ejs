@@ -16,7 +16,13 @@
     
     <% if (contentSectionBlock.title) { %>
     <h3 class="">
-        <%= contentSectionBlock.title %>
+        <% if (contentSectionBlock.url) { %>
+            <a href="<%= contentSectionBlock.url %>">
+                <%= contentSectionBlock.title %>
+            </a>
+        <% } else { %>
+            <%= contentSectionBlock.title %>
+        <%}%>
     </h3>
     <%}%>
     

@@ -45,26 +45,30 @@ app.get('/', (request, response) => {
     var contentSectionServices = new ContentSection("Services", "id-services");
     contentSectionServices.addBlock(
         undefined,
+        undefined,
         "Devis de travaux",
         "Venez faire votre devis ici",
         30);
     contentSectionServices.addBlock(
         "/provides/assets/gurren_lagann.jpg",
+        "#",
         "Architecture",
         "Nous avons des architectes.",
         30);
     contentSectionServices.addBlock(
         undefined,
+        "#",
         "Gestion de chantier",
         "Venez confirmer la vrai gestion de chantier",
         30);
 
     var contentSectionText = new ContentSection("A Propos", "id-apropos");
-    contentSectionText.addBlock(undefined, undefined, TEXT);
+    contentSectionText.addBlock(undefined, undefined, undefined, TEXT);
 
     response.render('directions/home', {
         menuBar: menuBar,
         contentSections: [
+            contentSectionServices,
             contentSectionText
         ]
     });
@@ -169,7 +173,7 @@ app.get('/presentation', (request, response) => {
     menuBar.addItem(new MenuBarItem("Nos projets", "/projects", false));
 
     var contentSectionText = new ContentSection("A Propos", "id-presentation");
-    contentSectionText.addBlock(undefined, undefined, TEXT);
+    contentSectionText.addBlock(undefined, undefined, undefined, TEXT);
 
     response.render('directions/presentation', {
         menuBar: menuBar,
@@ -188,7 +192,7 @@ app.get('/projects', (request, response) => {
     menuBar.addItem(new MenuBarItem("Nos projets", "/projects", true));
 
     var contentSectionText = new ContentSection("A Propos", "id-projects");
-    contentSectionText.addBlock(undefined, undefined, TEXT);
+    contentSectionText.addBlock(undefined, undefined, undefined, TEXT);
 
     response.render('directions/projects', {
         menuBar: menuBar,
@@ -207,7 +211,7 @@ app.get('/services', (request, response) => {
     menuBar.addItem(new MenuBarItem("Nos projets", "/projects", false));
 
     var contentSectionText = new ContentSection("A Propos", "id-services");
-    contentSectionText.addBlock(undefined, undefined, TEXT);
+    contentSectionText.addBlock(undefined, undefined, undefined, TEXT);
 
     response.render('directions/services', {
         menuBar: menuBar,

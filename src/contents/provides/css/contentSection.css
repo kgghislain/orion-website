@@ -48,6 +48,9 @@
     font-weight: bold;
     color: #0c283d;
 }
+.content-section-block > h3 > a {
+    text-decoration: none;
+}
 .content-section-block > div {
     /*(block text container)*/
     padding: 2%;
