@@ -27,6 +27,8 @@
 
 
 .menu-bar-top {
+    display: flex;
+    flex-direction: row;
     width: 100%;
     background-color: #0c283d;
 }
@@ -107,7 +109,7 @@
     }
  
     .menu-bar-directions-div {
-        width: 80%;
+        width: 100%;
         height: 100%;
     
         display: flex;
@@ -132,4 +134,36 @@
         margin-top: 1%; margin-bottom: 1%;
         text-align: center;
     }
+}
+
+
+.menu-bar-contact {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    padding: 1%;
+}
+
+.menu-bar-contact-phone {
+    width: 20%;
+    height: 100%;
+    margin-left: 2%;
+    margin-right: 2%;
+
+    text-align: center;
+
+    background-color: #f7ba32;
+}
+
+.menu-bar-contact-message {
+    width: 20%;
+    height: 100%;
+    margin-left: 2%;
+    margin-right: 2%;
+
+    text-align: center;
+
+    background-color: #f7ba32;
 }
