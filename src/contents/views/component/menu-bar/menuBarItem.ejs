@@ -4,8 +4,11 @@
     <a href="<%= menuBarItem.url %>" class="<% if (menuBarItem.active == 0) { %>current<% } %>">
         <%= menuBarItem.name %>
     </a>
-    
-    <ul class="menu-bar-directions-li-suditem-div">
+</li>
+
+<% if (menuBarItem.subMenuItems) { %>
+<div>
+    <ul>
         <% menuBarItem.subMenuItems.forEach( function(subItem) { %>
             <li>
                 <a class="" href="<%= subItem.url %>">
@@ -14,4 +17,5 @@
             </li>
         <% }) %>
     </ul>
-</li>
+</div>
+<% } %>

@@ -22,18 +22,25 @@ app.use("/provides", express.static("./src/contents/provides"));
 console.log("Server is starting ... ");
 
 app.get('/', (request, response) => {
-    var menuBar = new MenuBar();
-    menuBar.addItem(new MenuBarItem("Acceuil", "/", true));
-    menuBar.addItem(new MenuBarItem("Services", "/services", false));
-    menuBar.addItem(new MenuBarItem("Qui somme nous ?", "/presentation", false));
-    menuBar.addItem(new MenuBarItem("Contact", "/contact", false));
-    menuBar.addItem(new MenuBarItem("Nos projets", "/projects", false));
     // var menuItemProjects = new MenuBarItem("Projets", "#", false);
     // menuItemProjects.addSubMenuItem("Services", "#");
     // menuItemProjects.addSubMenuItem("Services", "#");
     // menuItemProjects.addSubMenuItem("Services", "#");
     // menuItemProjects.addSubMenuItem("Services", "#");
     // menuItemProjects.addSubMenuItem("Services", "#");
+
+    var menuItemServices = new MenuBarItem("Services", "/services", false);
+    menuItemServices.addSubMenuItem("Construction", "#");
+    menuItemServices.addSubMenuItem("Travaux publics", "#");
+    menuItemServices.addSubMenuItem("Humidite", "#");
+    menuItemServices.addSubMenuItem("Renovation", "#");
+    menuItemServices.addSubMenuItem("Contact", "#");
+    var menuBar = new MenuBar();
+    menuBar.addItem(new MenuBarItem("Acceuil", "/", true));
+    menuBar.addItem(menuItemServices);
+    menuBar.addItem(new MenuBarItem("Qui somme nous ?", "/presentation", false));
+    menuBar.addItem(new MenuBarItem("Contact", "/contact", false));
+    menuBar.addItem(new MenuBarItem("Nos projets", "/projects", false));
 
     var contentSectionServices = new ContentSection("Services", "id-services");
     contentSectionServices.addBlock(
@@ -161,7 +168,7 @@ app.get('/presentation', (request, response) => {
     menuBar.addItem(new MenuBarItem("Contact", "/contact", false));
     menuBar.addItem(new MenuBarItem("Nos projets", "/projects", false));
 
-    var contentSectionText = new ContentSection("A Propos", "id-apropos");
+    var contentSectionText = new ContentSection("A Propos", "id-presentation");
     contentSectionText.addBlock(undefined, undefined, TEXT);
 
     response.render('directions/presentation', {
@@ -180,7 +187,7 @@ app.get('/projects', (request, response) => {
     menuBar.addItem(new MenuBarItem("Contact", "/contact", false));
     menuBar.addItem(new MenuBarItem("Nos projets", "/projects", true));
 
-    var contentSectionText = new ContentSection("A Propos", "id-apropos");
+    var contentSectionText = new ContentSection("A Propos", "id-projects");
     contentSectionText.addBlock(undefined, undefined, TEXT);
 
     response.render('directions/projects', {
@@ -199,7 +206,7 @@ app.get('/services', (request, response) => {
     menuBar.addItem(new MenuBarItem("Contact", "/contact", false));
     menuBar.addItem(new MenuBarItem("Nos projets", "/projects", false));
 
-    var contentSectionText = new ContentSection("A Propos", "id-apropos");
+    var contentSectionText = new ContentSection("A Propos", "id-services");
     contentSectionText.addBlock(undefined, undefined, TEXT);
 
     response.render('directions/services', {

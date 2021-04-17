@@ -10,13 +10,16 @@ function MenuBarItem (name, url, active_) {
     if(active_) {
         this.active = 0;
     }
-    this.subMenuItems = [];
+    this.subMenuItems = undefined;
     
     /**
      * @param {string} name 
      * @param {string} url 
      */
     this.addSubMenuItem = function (name, url) {
+        if(this.subMenuItems == undefined) {
+            this.subMenuItems = [];
+        }
         this.subMenuItems.push({name, url});
     }
 }
