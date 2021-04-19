@@ -7,15 +7,31 @@
 </li>
 
 <% if (menuBarItem.subMenuItems) { %>
-<div>
-    <ul>
-        <% menuBarItem.subMenuItems.forEach( function(subItem) { %>
-            <li>
-                <a class="" href="<%= subItem.url %>">
-                    <%= subItem.name %>
-                </a>
-            </li>
-        <% }) %>
-    </ul>
+<div 
+    <% if (menuBarItem.hasSubSubItems) { %>
+        class="menu-bar-sub-sub-items-div"
+    <% } else { %>
+        class="menu-bar-sub-items-div"
+    <% } %>
+    >
+
+    <% menuBarItem.subMenuItems.forEach( function(subItem) { %>
+        <div class="menu-bar-sub-item-div">
+            <a href="<%= subItem.url %>">
+                <%= subItem.name %>
+            </a>
+            <% if (subItem.subSubItems) { %>
+                <div>
+                    <% subItem.subSubItems.forEach( function(subSubItem) { %>
+                        <div >
+                            <a class="menu-bar-sub-item-div-sub-item" href="<%= subSubItem.url%>">
+                                <%= subSubItem.name%>
+                            </a>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } %>
+        </div>
+    <% }) %>
 </div>
 <% } %>

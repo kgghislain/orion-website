@@ -13,7 +13,8 @@ var {
 } = require('./src/contentsmanagement/contentSection');
 var {
     MenuBar,
-    MenuBarItem
+    MenuBarItem,
+    MenuBarSuperSubItem
 } = require('./src/contentsmanagement/menuBar');
 
 app.set('view engine', 'ejs');
@@ -33,6 +34,34 @@ function getMenuBar(current) {
     menuItemServices.addSubMenuItem("Construction", "/services/construction");
     menuItemServices.addSubMenuItem("Travaux publics", "/services/travaux-public");
     menuItemServices.addSubMenuItem("Renovation", "/services/renovation");
+
+    var menuItemTest = new MenuBarItem(
+        "Test",
+        "#",
+        current==5);
+    var sec1 = new MenuBarSuperSubItem("section 1", "#");
+    sec1.addSubSubItem("item 1", "#")
+    sec1.addSubSubItem("item 2", "#")
+    sec1.addSubSubItem("item 3", "#")
+    sec1.addSubSubItem("item 4", "#")
+    var sec2 = new MenuBarSuperSubItem("section 2", "#");
+    sec2.addSubSubItem("item 1", "#")
+    sec2.addSubSubItem("item 2", "#")
+    sec2.addSubSubItem("item 3", "#")
+    sec2.addSubSubItem("item 4", "#")
+    var sec3 = new MenuBarSuperSubItem("section 3", "#");
+    var sec4 = new MenuBarSuperSubItem("section 4", "#");
+    var sec5 = new MenuBarSuperSubItem("section 5", "#");
+    sec5.addSubSubItem("item 1", "#")
+    sec5.addSubSubItem("item 2", "#")
+    sec5.addSubSubItem("item 3", "#")
+    sec5.addSubSubItem("item 4", "#")
+    menuItemTest.addSuperSubItem(sec1);
+    menuItemTest.addSuperSubItem(sec2);
+    menuItemTest.addSuperSubItem(sec3);
+    menuItemTest.addSuperSubItem(sec4);
+    menuItemTest.addSuperSubItem(sec5);
+
     
     var menuBar = new MenuBar();
     menuBar.addItem(new MenuBarItem(
@@ -42,6 +71,7 @@ function getMenuBar(current) {
         "Qui somme nous ?", "/presentation",
         current==1));
     menuBar.addItem(menuItemServices);
+    menuBar.addItem(menuItemTest);
     menuBar.addItem(
         new MenuBarItem("Nos realisations", "/projects",
         current==3));

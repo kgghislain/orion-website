@@ -1,3 +1,16 @@
+function MenuBarSuperSubItem (name, url) {
+    this.name = name;
+    this.url = url;
+    this.subSubItems = undefined;
+
+    this.addSubSubItem = function (name, url) {
+        if(this.subSubItems == undefined) {
+            this.subSubItems = [];
+        }
+        this.subSubItems.push({name: name, url: url});
+    }
+}
+
 /**
  * @param {string} name 
  * @param {string} url 
@@ -11,6 +24,7 @@ function MenuBarItem (name, url, active_) {
         this.active = 0;
     }
     this.subMenuItems = undefined;
+    this.hasSubSubItems = undefined;
     
     /**
      * @param {string} name 
@@ -21,6 +35,18 @@ function MenuBarItem (name, url, active_) {
             this.subMenuItems = [];
         }
         this.subMenuItems.push({name, url});
+    }
+
+    /**
+     * 
+     * @param {MenuBarSuperSubItem} subItem 
+     */
+    this.addSuperSubItem = function (subItem) {
+        if(this.subMenuItems == undefined) {
+            this.subMenuItems = [];
+        }
+        this.subMenuItems.push(subItem);
+        this.hasSubSubItems = 1;
     }
 }
 
@@ -35,4 +61,4 @@ function MenuBar () {
     }
 }
 
-module.exports = {MenuBar, MenuBarItem};
+module.exports = {MenuBar, MenuBarItem, MenuBarSuperSubItem};

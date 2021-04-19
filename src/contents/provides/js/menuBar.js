@@ -49,12 +49,17 @@ for(var i=0; i<liWithSubs.length; i++) {
         subItems.forEach(sub => {
             if(sub.li == this) {
                 if(sub.li.parentNode.classList.contains("menu-bar-directions-ul-visible")) {
-                    this.after(sub.sub);
+                    var rect = sub.li.getBoundingClientRect();
+                    sub.li.parentNode.after(sub.sub);
+                    // sub.sub.style.top = rect.top+"px";
+                    // sub.sub.style.right = rect.right+"px";
                 }
                 else {
                     directionsDiv.after(sub.sub);
                     var rectThis = this.getBoundingClientRect();
-                    sub.sub.style.left = rectThis.left+"px";
+                    var rect = sub.sub.getBoundingClientRect();
+                    var middle = Math.abs(rect.right - rect.left)/2;
+                    sub.sub.style.left = (rectThis.left-middle)+"px";
                 }
             }
         });
