@@ -84,24 +84,25 @@ function getMenuBar(current) {
 app.get('/', (request, response) => {   
 
     var contentSectionActu = new ContentSection("Actualite", "id-actu");
+    contentSectionActu.setSelfFlexAlignment("flex-start")
     contentSectionActu.addBlock(
         undefined,
         undefined,
         "Devis de travaux",
         "Venez faire votre devis ici",
-        30);
+        20);
     contentSectionActu.addBlock(
-        "/provides/assets/gurren_lagann.jpg",
+        "/provides/assets/Logo.svg",
         "#",
         "Architecture",
         "Nous avons des architectes.",
-        30);
+        20);
     contentSectionActu.addBlock(
         undefined,
         "#",
         "Gestion de chantier",
         "Venez confirmer la vrai gestion de chantier",
-        30);
+        20);
 
     var contentSectionText = new ContentSection("C'est quoi Orion", "id-intro");
     contentSectionText.addBlock(undefined, undefined, undefined, TEXT);
@@ -189,6 +190,7 @@ app.get('/contact', (request, response) => {
             "Message")
     );
     contentSectionContact.addBlockForm(contactBlock);
+    contentSectionContact.setSelfFlexAlignment("center");
 
     response.render('directions/contact', {
         menuBar: getMenuBar(4),

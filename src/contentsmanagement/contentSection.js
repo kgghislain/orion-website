@@ -57,6 +57,7 @@ function ContentSection (title, id) {
     this.title = title;
     this.id = id;
     this.contentSectionBlocks = [];
+    this.align = undefined;
 
     /**
      * 
@@ -77,6 +78,13 @@ function ContentSection (title, id) {
      */
     this.addBlockForm = function (blockForm) {
         this.contentSectionBlocks.push(blockForm);
+    }
+
+    /**
+     * @param {string} align 
+     */
+    this.setSelfFlexAlignment = function (align) {
+        this.align = align;
     }
 };
 

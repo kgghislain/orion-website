@@ -1,5 +1,12 @@
 <%# Needs: contentSection = ContentSection%>
 <div 
+style="
+        <% if (contentSection.align) { %>
+            display: flex;
+            align-self: <%= contentSection.align%>;
+        <% } %>
+        "
+
     <% if (contentSection.id) { %>
     id="<%= contentSection.id %>"
     <% } %>
