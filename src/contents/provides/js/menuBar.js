@@ -14,10 +14,11 @@ for(var i=0; i<buttons.length; i++) {
 }
 
 function removeSubItem (currentOverItem) {
+    if(currentOverItem == null)
+        return;
     subItems.forEach(sub => {
         if(sub.li == currentOverItem) {
             sub.sub.remove();
-            currentOverItem = null;
         }
     });
 }
@@ -47,6 +48,7 @@ for(var i=0; i<liWithSubs.length; i++) {
 
     liWithSubs[i].addEventListener("mouseenter", function () {
         subItems.forEach(sub => {
+            removeSubItem(currentOverItem);
             if(sub.li == this) {
                 if(sub.li.parentNode.classList.contains("menu-bar-directions-ul-visible")) {
                     var rect = sub.li.getBoundingClientRect();
@@ -70,7 +72,8 @@ for(var i=0; i<liWithSubs.length; i++) {
         setTimeout(function () {
             if(isOverSub)
                 return;
-            removeSubItem(currentOverItem);    
+            removeSubItem(currentOverItem);
+            currentOverItem = null;
         },
         300);
     });
