@@ -200,6 +200,25 @@ app.get('/projects', (request, response) => {
     });
 })
 
+app.get('/mentions-legales', (request, response) => {
+    var contentSectionText = new ContentSection("Mentions legales", "id-mentions-legales");
+    contentSectionText.addBlock(undefined, undefined, undefined,
+        "<h2>Realisation1</h2>"+"<br>"+TEXT);
+    contentSectionText.addBlock(undefined, undefined, undefined,
+        "<h2>Realisation2</h2>"+"<br>"+TEXT);
+    contentSectionText.addBlock(undefined, undefined, undefined,
+        "<h2>Realisation3</h2>"+"<br>"+TEXT);
+    contentSectionText.addBlock(undefined, undefined, undefined,
+        "<h2>Realisation4</h2>"+"<br>"+TEXT);
+
+    response.render('directions/mentions-legales', {
+        menuBar: getMenuBar(3),
+        contentSections: [
+            contentSectionText
+        ]
+    });
+})
+
 app.get('/services', (request, response) => {
     var contentSectionText = new ContentSection("Services", "id-services");
     contentSectionText.addBlock(undefined, undefined, undefined, TEXT);
