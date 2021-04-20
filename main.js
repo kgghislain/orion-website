@@ -34,37 +34,27 @@ function getMenuBar(current) {
         "Services",
         "/services",
         current==2);
-    menuItemServices.addSubMenuItem("Construction", "/services/construction");
-    menuItemServices.addSubMenuItem("Travaux publics", "/services/travaux-public");
-    menuItemServices.addSubMenuItem("Renovation", "/services/renovation");
 
-    var menuItemTest = new MenuBarItem(
-        "Test",
-        "#",
-        current==5);
-    var sec1 = new MenuBarSuperSubItem("section 1", "#");
-    sec1.addSubSubItem("item 1", "#")
-    sec1.addSubSubItem("item 2", "#")
-    sec1.addSubSubItem("item 3", "#")
-    sec1.addSubSubItem("item 4", "#")
-    var sec2 = new MenuBarSuperSubItem("section 2", "#");
-    sec2.addSubSubItem("item 1", "#")
-    sec2.addSubSubItem("item 2", "#")
-    sec2.addSubSubItem("item 3", "#")
-    sec2.addSubSubItem("item 4", "#")
-    var sec3 = new MenuBarSuperSubItem("section 3", "#");
-    var sec4 = new MenuBarSuperSubItem("section 4", "#");
-    var sec5 = new MenuBarSuperSubItem("section 5", "#");
-    sec5.addSubSubItem("item 1", "#")
-    sec5.addSubSubItem("item 2", "#")
-    sec5.addSubSubItem("item 3", "#")
-    sec5.addSubSubItem("item 4", "#")
-    menuItemTest.addSuperSubItem(sec1);
-    menuItemTest.addSuperSubItem(sec2);
-    menuItemTest.addSuperSubItem(sec3);
-    menuItemTest.addSuperSubItem(sec4);
-    menuItemTest.addSuperSubItem(sec5);
+    var constructionItem = new MenuBarSuperSubItem("Construction", "/services/construction");
+    constructionItem.addSubSubItem("Maisons Design", "/services/construction/#id-maison-design");
+    constructionItem.addSubSubItem("Maisons Individuelles", "/services/construction/#id-maison-individuelle");
+    constructionItem.addSubSubItem("Maisons Modernes", "/services/construction/#id-maison-moderne");
+    constructionItem.addSubSubItem("Permit de construire", "/services/construction/#id-permit-construire");
+    constructionItem.addSubSubItem("Realisations", "/services/construction/#id-realisations");
+    var assainissementItem = new MenuBarSuperSubItem("Assainissement", "/services/assainissement");
+    assainissementItem.addSubSubItem("Mise en conformite", "/services/assainissement/#id-mise-en-conformite");
+    assainissementItem.addSubSubItem("Separation de reseaux", "/services/assainissement/#id-separation-reseaux");
+    assainissementItem.addSubSubItem("Terrassement", "/services/assainissement/#id-terrassement");
+    assainissementItem.addSubSubItem("VRD", "/services/assainissement/#id-vrd");
+    assainissementItem.addSubSubItem("Realisations", "/services/assainissement/#id-realisations");
+    var renovationItem = new MenuBarSuperSubItem("Renovation", "/services/renovation");
+    renovationItem.addSubSubItem("Agencements exterieur", "/services/renovation/#id-agencement-exterieur")
+    renovationItem.addSubSubItem("Agencements interieur", "/services/renovation/#id-agencement-interieur")
+    renovationItem.addSubSubItem("Realisations", "/services/renovation/#id-realisations")
 
+    menuItemServices.addSuperSubItem(constructionItem);
+    menuItemServices.addSuperSubItem(assainissementItem);
+    menuItemServices.addSuperSubItem(renovationItem);
     
     var menuBar = new MenuBar();
     menuBar.addItem(new MenuBarItem(
@@ -74,48 +64,26 @@ function getMenuBar(current) {
         "Qui somme nous ?", "/presentation",
         current==1));
     menuBar.addItem(menuItemServices);
-    menuBar.addItem(menuItemTest);
     menuBar.addItem(new MenuBarItem(
         "Contact", "/contact",
         current==4));
     return menuBar;
 }
 
-app.get('/', (request, response) => {   
-
-    var contentSectionActu = new ContentSection("Actualite", "id-actu");
-    contentSectionActu.setSelfFlexAlignment("flex-start")
-    contentSectionActu.addBlock(
-        undefined,
-        undefined,
-        "Devis de travaux",
-        "Venez faire votre devis ici",
-        20);
-    contentSectionActu.addBlock(
-        "/provides/assets/Logo.svg",
-        "#",
-        "Architecture",
-        "Nous avons des architectes.",
-        20);
-    contentSectionActu.addBlock(
-        undefined,
-        "#",
-        "Gestion de chantier",
-        "Venez confirmer la vrai gestion de chantier",
-        20);
-
-    var contentSectionText = new ContentSection("C'est quoi Orion", "id-intro");
-    contentSectionText.addBlock(undefined, undefined, undefined, TEXT);
-
-    ContentReader.readContentSectionFile("contents/TestContent.html", 
-    function (err, section) {
-        response.render('directions/home', {
-            menuBar: getMenuBar(0),
-            contentSections: [
-                contentSectionText,
-                contentSectionActu,
-                section
-            ]
+app.get('/', (request, response) => {
+    ContentReader.readContentSectionFile("contents/P-acceuil/S-orion.html", 
+    function (err, sectionOrion) {
+        if(err) return;
+        ContentReader.readContentSectionFile("contents/P-acceuil/S-actualites.html",
+        function (err, sectionActu) {
+            if(err) return;
+            response.render('directions/home', {
+                menuBar: getMenuBar(0),
+                contentSections: [
+                    sectionActu,
+                    sectionOrion
+                ]
+            });
         });
     });
 });
@@ -259,94 +227,142 @@ app.get('/contact', (request, response) => {
 })
 
 app.get('/presentation', (request, response) => {
-    var contentSectionText = new ContentSection("Qui somme nous ?", "id-presentation");
-    contentSectionText.addBlock(undefined, undefined, undefined,
-        TEXT+"<br>"+TEXT);
-
-    response.render('directions/presentation', {
-        menuBar: getMenuBar(1),
-        contentSections: [
-            contentSectionText
-        ]
+    ContentReader.readContentSectionFile("contents/P-presentation/S-presentation.html", 
+    function (err, sectionPresentation) {
+        if(err) return;
+        response.render('directions/presentation', {
+            menuBar: getMenuBar(1),
+            contentSections: [
+                sectionPresentation
+            ]
+        });
     });
 })
 
 app.get('/mentions-legales', (request, response) => {
-    var contentSectionText = new ContentSection("Mentions legales", "id-mentions-legales");
-
-    contentSectionText.addBlock(undefined, undefined, undefined,
-        "<h2>Adresse</h2>"+"<br>"+TEXT);
-    contentSectionText.addBlock(undefined, undefined, undefined,
-        "<h2>Activites</h2>"+"<br>"+TEXT);
-    contentSectionText.addBlock(undefined, undefined, undefined,
-        "<h2>Le site</h2>"+"<br>"+TEXT);
-
-    response.render('directions/mentions-legales', {
-        menuBar: getMenuBar(3),
-        contentSections: [
-            contentSectionText
-        ]
+    ContentReader.readContentSectionFile("contents/P-mentions-legales/S-mentions-legales.html", 
+    function (err, sectionMentionLegale) {
+        if(err) return;
+        response.render('directions/mentions-legales', {
+            menuBar: getMenuBar(3),
+            contentSections: [
+                sectionMentionLegale
+            ]
+        });
     });
 })
 
 app.get('/services', (request, response) => {
-    var contentSectionText = new ContentSection("Services", "id-services");
-    contentSectionText.addBlock(undefined, undefined, undefined, TEXT);
-
-    response.render('directions/services', {
-        menuBar: getMenuBar(2),
-        contentSections: [
-            contentSectionText
-        ]
+    ContentReader.readContentSectionFile("contents/P-services/S-services.html", 
+    function (err, sectionServices) {
+        if(err) return;
+        response.render('directions/services', {
+            menuBar: getMenuBar(2),
+            contentSections: [
+                sectionServices
+            ]
+        });
     });
 })
 app.get('/services/construction', (request, response) => {
-    var contentSectionRealisation = new ContentSection(
-        "Realisation",
-        "id-services-construction-presentation");
-    contentSectionRealisation.addBlock(undefined, undefined, undefined, TEXT);
-    var contentSectionRealisation = new ContentSection(
-        "Permis de construire",
-        "id-services-construction-presentation");
-    contentSectionRealisation.addBlock(undefined, undefined, undefined, TEXT);
+    ContentReader.readContentSectionFile("contents/C-services/P-construction/S-maison-design.html", 
+    function (err, sectionMaisonDesign) {
+        if(err) return;
 
-    response.render('directions/services/construction', {
-        menuBar: getMenuBar(2),
-        contentSections: [
-            contentSectionRealisation
-        ]
+        ContentReader.readContentSectionFile("contents/C-services/P-construction/S-maison-individuelle.html", 
+        function (err, sectionMaisonIndividuelle) {
+            if(err) return;
+            
+            ContentReader.readContentSectionFile("contents/C-services/P-construction/S-maison-moderne.html", 
+            function (err, sectionMaisonModerne) {
+                if(err) return;
+                
+                ContentReader.readContentSectionFile("contents/C-services/P-construction/S-permit-construire.html", 
+                function (err, sectionPermitConstruire) {
+                    if(err) return;
+                    
+                    ContentReader.readContentSectionFile("contents/C-services/P-construction/S-realisations.html", 
+                    function (err, sectionRealisations) {
+                        if(err) return;
+                        
+                        response.render('directions/services', {
+                            menuBar: getMenuBar(2),
+                            contentSections: [
+                                sectionMaisonModerne,
+                                sectionMaisonIndividuelle,
+                                sectionMaisonDesign,
+                                sectionPermitConstruire,
+                                sectionRealisations
+                            ]
+                        });
+                    });
+                });
+            });
+        });
     });
 })
-app.get('/services/travaux-public', (request, response) => {
-    var contentSectionText1 = new ContentSection("Travaux publics 1", "id-services-travaux-public-1");
-    contentSectionText1.addBlock(undefined, undefined, undefined, TEXT);
-    contentSectionText1.addBlock(undefined, undefined, undefined, "<strong>"+TEXT+"</strong>");
-    contentSectionText1.addBlock(undefined, undefined, undefined, TEXT);
+app.get('/services/assainissement', (request, response) => {
 
-    var contentSectionText2 = new ContentSection("Travaux publics 2", "id-services-travaux-public-2");
-    contentSectionText2.addBlock(undefined, undefined, undefined, TEXT);
-    contentSectionText2.addBlock(undefined, undefined, undefined, "<strong>"+TEXT+"</strong>");
-    contentSectionText2.addBlock(undefined, undefined, undefined, TEXT);
+    ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-mise-en-conformite.html", 
+    function (err, sectionMiseConformite) {
+        if(err) return;
 
-    response.render('directions/services/travaux-public', {
-        menuBar: getMenuBar(2),
-        contentSections: [
-            contentSectionText1,
-            contentSectionText2
-        ]
+        ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-separation-reseaux.html", 
+        function (err, sectionSeparationReseaux) {
+            if(err) return;
+            
+            ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-terrassement.html", 
+            function (err, sectionTerrassement) {
+                if(err) return;
+                
+                ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-vrd.html", 
+                function (err, sectionVRD) {
+                    if(err) return;
+                    
+                    ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-realisations.html", 
+                    function (err, sectionRealisations) {
+                        if(err) return;
+                        
+                        response.render('directions/services', {
+                            menuBar: getMenuBar(2),
+                            contentSections: [
+                                sectionMiseConformite,
+                                sectionSeparationReseaux,
+                                sectionTerrassement,
+                                sectionVRD,
+                                sectionRealisations
+                            ]
+                        });
+                    });
+                });
+            });
+        });
     });
 })
 app.get('/services/renovation', (request, response) => {
-    var contentSectionText = new ContentSection("Renovation", "id-services-renovation");
-    contentSectionText.addBlock(undefined, undefined, undefined, TEXT);
-    contentSectionText.addBlock(undefined, undefined, undefined, TEXT);
-    contentSectionText.addBlock(undefined, undefined, undefined, TEXT);
-
-    response.render('directions/services/renovation', {
-        menuBar: getMenuBar(2),
-        contentSections: [
-            contentSectionText
-        ]
+    
+    ContentReader.readContentSectionFile("contents/C-services/P-renovation/S-agencement-exterieur.html", 
+    function (err, sectionAgencementInterieur) {
+        if(err) return;
+        
+        ContentReader.readContentSectionFile("contents/C-services/P-renovation/S-agencement-interieur.html", 
+        function (err, sectionAgencementExterieur) {
+            if(err) return;
+            
+            ContentReader.readContentSectionFile("contents/C-services/P-renovation/S-realisations.html", 
+            function (err, sectionRealisations) {
+                if(err) return;
+                
+                response.render('directions/services', {
+                    menuBar: getMenuBar(2),
+                    contentSections: [
+                        sectionAgencementExterieur,
+                        sectionAgencementInterieur,
+                        sectionRealisations
+                    ]
+                });
+            });
+        });
     });
 })
 

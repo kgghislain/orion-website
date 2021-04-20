@@ -44,8 +44,6 @@ var readContentSectionFile = function (filename, callback) {
             }
         }
 
-        console.log(section);
-
         callback(undefined, section);
     })
 }
