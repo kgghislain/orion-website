@@ -7,10 +7,16 @@ var {
     ContentSectionBlockFormSingleChoice
 } = require('./contentSection');
 
+var errorContentSection = new ContentSection("", "");
+errorContentSection.addBlock(
+    "", "", "",
+    "Une erreur s'est produite");
+
 var readContentSectionFile = function (filename, callback) {
     fs.readFile(filename, 'utf8', function (err, data) {
         if(err) {
-            callback(err);
+            console.log(err);
+            callback(undefined, errorContentSection);
             return;
         }
 
