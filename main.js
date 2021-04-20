@@ -17,6 +17,8 @@ var {
     MenuBarItem,
     MenuBarSuperSubItem
 } = require('./src/contentsmanagement/menuBar');
+var ContentReader = 
+    require('./src/contentsmanagement/contentFileReader');
 
 app.set('view engine', 'ejs');
 app.set('views', './src/contents/views');
@@ -73,9 +75,6 @@ function getMenuBar(current) {
         current==1));
     menuBar.addItem(menuItemServices);
     menuBar.addItem(menuItemTest);
-    menuBar.addItem(
-        new MenuBarItem("Nos realisations", "/projects",
-        current==3));
     menuBar.addItem(new MenuBarItem(
         "Contact", "/contact",
         current==4));
@@ -108,12 +107,16 @@ app.get('/', (request, response) => {
     var contentSectionText = new ContentSection("C'est quoi Orion", "id-intro");
     contentSectionText.addBlock(undefined, undefined, undefined, TEXT);
 
-    response.render('directions/home', {
-        menuBar: getMenuBar(0),
-        contentSections: [
-            contentSectionText,
-            contentSectionActu
-        ]
+    ContentReader.readContentSectionFile("contents/TestContent.html", 
+    function (err, section) {
+        response.render('directions/home', {
+            menuBar: getMenuBar(0),
+            contentSections: [
+                contentSectionText,
+                contentSectionActu,
+                section
+            ]
+        });
     });
 });
 
@@ -268,25 +271,6 @@ app.get('/presentation', (request, response) => {
     });
 })
 
-app.get('/projects', (request, response) => {
-    var contentSectionText = new ContentSection("Nos realisations", "id-projects");
-    contentSectionText.addBlock(undefined, undefined, undefined,
-        "<h3>Realisation1</h3>"+"<br>"+TEXT);
-    contentSectionText.addBlock(undefined, undefined, undefined,
-        "<h3>Realisation2</h3>"+"<br>"+TEXT);
-    contentSectionText.addBlock(undefined, undefined, undefined,
-        "<h3>Realisation3</h3>"+"<br>"+TEXT);
-    contentSectionText.addBlock(undefined, undefined, undefined,
-        "<h3>Realisation4</h3>"+"<br>"+TEXT);
-
-    response.render('directions/projects', {
-        menuBar: getMenuBar(3),
-        contentSections: [
-            contentSectionText
-        ]
-    });
-})
-
 app.get('/mentions-legales', (request, response) => {
     var contentSectionText = new ContentSection("Mentions legales", "id-mentions-legales");
 
@@ -317,15 +301,19 @@ app.get('/services', (request, response) => {
     });
 })
 app.get('/services/construction', (request, response) => {
-    var contentSectionText = new ContentSection("Constructions", "id-services-construction");
-    contentSectionText.addBlock(undefined, undefined, undefined, TEXT);
-    contentSectionText.addBlock(undefined, undefined, undefined, "<h3>"+TEXT+"</h3>");
-    contentSectionText.addBlock(undefined, undefined, undefined, TEXT);
+    var contentSectionRealisation = new ContentSection(
+        "Realisation",
+        "id-services-construction-presentation");
+    contentSectionRealisation.addBlock(undefined, undefined, undefined, TEXT);
+    var contentSectionRealisation = new ContentSection(
+        "Permis de construire",
+        "id-services-construction-presentation");
+    contentSectionRealisation.addBlock(undefined, undefined, undefined, TEXT);
 
     response.render('directions/services/construction', {
         menuBar: getMenuBar(2),
         contentSections: [
-            contentSectionText
+            contentSectionRealisation
         ]
     });
 })
