@@ -26,8 +26,25 @@ var readContentSectionFile = function (filename, callback) {
         for(var i=0; i<blocks.length; i++) {
             var block = blocks[i];
             var blockType = block.querySelector(".section-block-type").text;
-            var blockImg = block.querySelector(".section-block-img").text;
-            var blockUrl = block.querySelector(".section-block-url").text;
+            
+            var blockImgNode = block.querySelector(".section-block-img");
+            var blockImg;
+            if(blockImgNode == null || blockImgNode.text == "") {
+                blockImg = undefined;
+            }
+            else {
+                blockImg = blockImgNode.text;
+            }
+
+            var blockUrlNode = lock.querySelector(".section-block-url");
+            var blockUrl;
+            if(blockImgNode == null || blockUrlNode.text == "") {
+                blockUrl = undefined;
+            }
+            else {
+                blockUrl = b.text;
+            }
+
             var blockTitle = block.querySelector(".section-block-title").text;
             var blockWidth = block.querySelector(".section-block-width").text;
             var blockHeight = block.querySelector(".section-block-height").text;
