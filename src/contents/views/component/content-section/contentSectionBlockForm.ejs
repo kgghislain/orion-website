@@ -19,14 +19,36 @@
 
         <% contentSectionBlockForm.inputs.forEach( function (input) {%>
             <% if (input.type == "textarea") {%>
-                <div class="">
+                <div>
                     <label><%= input.label%></label>
                     <textarea name="<%= input.name %>" class="form-control" rows="10"></textarea>
                 </div>
+            <% } else if (input.type == "radio") {%>
+                <div>
+                    <fieldset>
+                        <legend><%= input.label%></legend>
+                        
+                        <% input.choices.forEach( function (choice) { %>
+                        <label for="<%= input.name %>"><%= choice.label %></label>
+                        <input
+                            name="<%= input.name %>"
+                            type="<%= input.type %>"
+                            <% if(choice.checked) { %>checked <% } %>
+                            value="<%= choice.value %>"
+                            class="form-control">
+                        <% }) %>
+
+                    </fieldset>
+                </div>
             <% } else {%>
-                <div class="">
+                <div>
                     <label for="<%= input.name %>"><%= input.label %></label>
-                    <input name="<%= input.name %>" type="<%= input.type %>" class="form-control">
+                    <input
+                        name="<%= input.name %>"
+                        type="<%= input.type %>"
+                        <% if(input.value) { %>value="<%= input.value %>" <% } %>
+                        <% if(input.required) { %>required <% } %>
+                        class="form-control">
                 </div>
             <% } %>
         <% }) %>

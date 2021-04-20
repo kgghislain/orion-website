@@ -9,7 +9,8 @@ TEXT += "<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing
 var {
     ContentSection,
     ContentSectionBlockForm,
-    ContentSectionBlockFormInput
+    ContentSectionBlockFormInput,
+    ContentSectionBlockFormSingleChoice
 } = require('./src/contentsmanagement/contentSection');
 var {
     MenuBar,
@@ -126,6 +127,19 @@ app.post('/contactform', (request, response) => {
             pass: ''
         }
     });
+    var contactLocationStr = request.body.ville;
+    if(request.body.codepostal) {
+        contactLocationStr = request.body.codepostal+" "+contactLocationStr;
+    }
+    if(request.body.adresse) {
+        contactLocationStr = request.body.adresse+" "+contactLocationStr;
+    }
+
+    var visitortypeStr = request.body.visitortype;
+    if(request.body.entreprise) {
+        visitortypeStr += ("\nentreprise :" + request.body.entreprise)
+    }
+
     var mailOptions = {
         from: 'gumeteapps@gmail.com',
         to: 'gumeteapps@gmail.com',
@@ -133,7 +147,9 @@ app.post('/contactform', (request, response) => {
         text:
             "From : " + request.body.nom + " " + request.body.prenom + "\n" + 
             "Telephone : " + request.body.phone + "\n" + 
-            "Email: " + request.body.email + 
+            "Email: " + request.body.email + "\n" +
+            "Adresse: " + contactLocationStr + "\n" +
+            visitortypeStr+ "\n" +
             "\n" + 
             request.body.message
     };
@@ -163,31 +179,70 @@ app.get('/contact', (request, response) => {
         new ContentSectionBlockFormInput(
             "prenom",
             "text",
-            "Prenom")
+            "Prenom *",
+            true)
     );
     contactBlock.addInput(
         new ContentSectionBlockFormInput(
             "nom",
             "text",
-            "Nom")
+            "Nom *",
+            true)
     );
     contactBlock.addInput(
         new ContentSectionBlockFormInput(
             "email",
             "email",
-            "Email")
+            "Email *",
+            true)
     );
     contactBlock.addInput(
         new ContentSectionBlockFormInput(
             "phone",
             "tel",
-            "Telephone")
+            "Telephone",
+            true)
+    );
+    contactBlock.addInput(
+        new ContentSectionBlockFormInput(
+            "adresse",
+            "text",
+            "Adresse")
+    );
+    contactBlock.addInput(
+        new ContentSectionBlockFormInput(
+            "codepostal",
+            "text",
+            "Code postal")
+    );
+    contactBlock.addInput(
+        new ContentSectionBlockFormInput(
+            "ville",
+            "text",
+            "Ville *",
+            true)
     );
     contactBlock.addInput(
         new ContentSectionBlockFormInput(
             "message",
             "textarea",
             "Message")
+    );
+    contactBlock.addSingleChoice(
+        new ContentSectionBlockFormSingleChoice(
+            "visitortype",
+            "Vous etes ?",
+            [
+                {label: "Professionnel", value: "professionnel", checked: "checked"},
+                {label: "Particulier", value: "particulier"},
+                {label: "Locataire", value: "locataire"}
+            ])
+    );
+    contactBlock.addInput(
+        new ContentSectionBlockFormInput(
+            "entreprise",
+            "text",
+            "Entreprise")
     );
     contentSectionContact.addBlockForm(contactBlock);
     contentSectionContact.setSelfFlexAlignment("center");
@@ -234,14 +289,13 @@ app.get('/projects', (request, response) => {
 
 app.get('/mentions-legales', (request, response) => {
     var contentSectionText = new ContentSection("Mentions legales", "id-mentions-legales");
+
     contentSectionText.addBlock(undefined, undefined, undefined,
-        "<h2>Realisation1</h2>"+"<br>"+TEXT);
+        "<h2>Adresse</h2>"+"<br>"+TEXT);
     contentSectionText.addBlock(undefined, undefined, undefined,
-        "<h2>Realisation2</h2>"+"<br>"+TEXT);
+        "<h2>Activites</h2>"+"<br>"+TEXT);
     contentSectionText.addBlock(undefined, undefined, undefined,
-        "<h2>Realisation3</h2>"+"<br>"+TEXT);
-    contentSectionText.addBlock(undefined, undefined, undefined,
-        "<h2>Realisation4</h2>"+"<br>"+TEXT);
+        "<h2>Le site</h2>"+"<br>"+TEXT);
 
     response.render('directions/mentions-legales', {
         menuBar: getMenuBar(3),

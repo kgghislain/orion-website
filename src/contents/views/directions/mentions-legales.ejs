@@ -1,0 +1,42 @@
+<%# Needs : menuBar = MenuBar %>
+<%# Needs : contentSections = ContentSection[] %>
+<%# Needs : footerContentSection = ContentSection %>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="/provides/css/menuBar.css">
+    <link rel="stylesheet" type="text/css" href="/provides/css/contentSection.css">
+    <link rel="stylesheet" type="text/css" href="/provides/css/footer.css">
+</head>
+
+<body 
+    style="
+        margin: 0;
+    ">
+
+    <%- include('../component/background') %>
+
+    <%- include('../component/header', {menuBar: menuBar}) %>
+
+    <div
+        style="
+            margin-top: 50%;
+        ">
+
+    <% if (contentSections) { %>
+        <%- include('../component/content-with-content-section', contentSections) %>
+    <% } %>
+
+    <%- include('../component/footer') %>
+
+    </div>
+
+    <script type="text/javascript" src="/provides/js/menuBar.js"></script>
+    <script type="text/javascript" src="/provides/js/background.js"></script>
+
+</body>
+
+</html>

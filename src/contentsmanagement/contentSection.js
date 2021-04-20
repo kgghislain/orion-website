@@ -13,10 +13,35 @@ function ContentSectionBlock (img, url, title, description, width, height) {
  * type can be any type that the html <input> tag can take as type.
  * Plus a textarea type.
  */
-function ContentSectionBlockFormInput (name, type, label) {
+function ContentSectionBlockFormInput (name, type, label, required, value) {
     this.name = name;
     this.type = type;
     this.label = label;
+    this.required = required;
+    this.value = value;
+};
+
+/**
+ * @param {string} label 
+ * @param {string} value 
+ */
+function Choice (label, value, checked) {
+    this.label = label;
+    this.value = value;
+    this.checked = checked;
+}
+
+/**
+ * @param {string} name 
+ * @param {string} label 
+ * @param {Choice[]} choices 
+ * @param {boolean} required
+ */
+function ContentSectionBlockFormSingleChoice (name, label, choices) {
+    this.name = name;
+    this.type = "radio";
+    this.label = label;
+    this.choices = choices;
 };
 
 /**
@@ -46,6 +71,12 @@ function ContentSectionBlockForm (action, method, title, description, submitName
      */
     this.addInput = function (input) {
         this.inputs.push(input);
+    }
+    /**
+     * @param {ContentSectionBlockFormSingleChoice} choice 
+     */
+    this.addSingleChoice = function (choice) {
+        this.inputs.push(choice);
     }
 };
 
@@ -88,4 +119,4 @@ function ContentSection (title, id) {
     }
 };
 
-module.exports = {ContentSection, ContentSectionBlockForm, ContentSectionBlockFormInput};
+module.exports = {ContentSection, ContentSectionBlockForm, ContentSectionBlockFormInput, ContentSectionBlockFormSingleChoice};
