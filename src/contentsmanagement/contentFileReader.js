@@ -48,7 +48,7 @@ var readContentSectionFile = function (filename, callback) {
                 blockUrl = undefined;
             }
             else {
-                blockUrl = b.text;
+                blockUrl = blockUrlNode.text;
             }
 
             var blockTitle = block.querySelector(".section-block-title").text;
