@@ -52,8 +52,25 @@ var readContentSectionFile = function (filename, callback) {
             }
 
             var blockTitle = block.querySelector(".section-block-title").text;
-            var blockWidth = block.querySelector(".section-block-width").text;
-            var blockHeight = block.querySelector(".section-block-height").text;
+            
+            var blockWidthNode = block.querySelector(".section-block-width");
+            var blockWidth;
+            if(blockWidthNode == null || blockWidthNode.text == "") {
+                blockWidth = undefined;
+            }
+            else {
+                blockWidth = blockWidthNode.text;
+            }
+
+            var blockHeightNode = block.querySelector(".section-block-height")
+            var blockHeight;
+            if(blockHeightNode == null || blockHeightNode.text == "") {
+                blockHeight = undefined;
+            }
+            else {
+                blockHeight = blockHeightNode.text;
+            }
+
             var blockDescription = block.querySelector(".section-block-description").innerHTML;
 
             if(blockType == "block") {
