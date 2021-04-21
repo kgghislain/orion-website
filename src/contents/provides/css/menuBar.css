@@ -216,9 +216,15 @@
     text-decoration-color: #0c283d;
     text-decoration-thickness: 20%;
 }
+.menu-bar-sub-item-div > a:hover {
+    background-color: white;
+}
 
 .menu-bar-sub-item-div-sub-item {
     color: #0c283d;
     text-decoration: none;
     margin-left: 20%;
+}
+.menu-bar-sub-item-div-sub-item:hover {
+    background-color: white;
 }
