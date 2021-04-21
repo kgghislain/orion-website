@@ -42,7 +42,7 @@ var readContentSectionFile = function (filename, callback) {
                 blockImg = blockImgNode.text;
             }
 
-            var blockUrlNode = lock.querySelector(".section-block-url");
+            var blockUrlNode = block.querySelector(".section-block-url");
             var blockUrl;
             if(blockImgNode == null || blockUrlNode.text == "") {
                 blockUrl = undefined;
