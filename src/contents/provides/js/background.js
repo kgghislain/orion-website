@@ -2,10 +2,6 @@ var bgs = document.getElementsByClassName("background");
 var currentBg = 0;
 var parent = bgs[currentBg].parentNode;
 
-for(var i=1; i<bgs.length; i++) {
-    bgs.item(i).style.display = "none";
-}
-
 function incrementCurrent () {
     currentBg++;
     if(currentBg >= bgs.length) {
@@ -18,5 +14,6 @@ setInterval(function () {
     var prev = bgs.item(currentBg);
     incrementCurrent();
     bgs.item(currentBg).style.display = "block";
-    prev.style.display = "none";
+    bgs.item(currentBg).style.opacity = "1";
+    prev.style.opacity = "0";
 }, 5000);
