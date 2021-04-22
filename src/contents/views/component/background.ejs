@@ -1,23 +1,13 @@
-<img class="background" src="/provides/assets/img/m00.jpeg"
-    style="
-        width: 100%; height: 100%;
-        position: fixed; top: 0%; z-index: -10;
-        opacity: 1;
-        transition: opacity 1s;
-    ">
+<% background.backgrounds.forEach( function (bg) { %>
+    <img 
+        class="background"
 
-<img class="background" src="/provides/assets/img/m01.jpeg"
-    style="
-        width: 100%; height: 100%;
-        position: fixed; top: 0%; z-index: -10;
-        opacity: 0;
-        transition: opacity 1s;
-    ">
+        <% if (bg.img) { %>src="<%= bg.img%>"<% } %>
 
-<img class="background" src="/provides/assets/img/m02.jpeg"
-    style="
-        width: 100%; height: 100%;
-        position: fixed; top: 0%; z-index: -10;
-        opacity: 0;
-        transition: opacity 1s;
+        style="
+            width: 100%; height: 100%;
+            position: fixed; top: 0%; z-index: -10;
+            opacity: 1;
+            <% if (bg.fadingTime) { %> transition: opacity <%= bg.fadingTime%>s; <% } %>
     ">
+<% } ) %>

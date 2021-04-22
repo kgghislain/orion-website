@@ -17,6 +17,9 @@ var {
     MenuBarItem,
     MenuBarSuperSubItem
 } = require('./src/contentsmanagement/menuBar');
+var {
+    Background
+} = require('./src/contentsmanagement/background');
 var ContentReader = 
     require('./src/contentsmanagement/contentFileReader');
 
@@ -79,8 +82,15 @@ app.get('/', (request, response) => {
         ContentReader.readContentSectionFile("contents/P-acceuil/S-actualites.html",
         function (err, sectionActu) {
             if(err) return;
+
+            var background = new Background();
+            background.addBackground(1, "/provides/assets/img/m00.jpeg");
+            background.addBackground(1, "/provides/assets/img/m01.jpeg");
+            background.addBackground(1, "/provides/assets/img/m02.jpeg");
+
             response.render('directions/home', {
                 menuBar: getMenuBar(0),
+                background: background,
                 contentSections: [
                     sectionActu,
                     sectionOrion
@@ -220,8 +230,14 @@ app.get('/contact', (request, response) => {
     contentSectionContact.addBlockForm(contactBlock);
     contentSectionContact.setSelfFlexAlignment("center");
 
+    var background = new Background();
+    background.addBackground(1, "/provides/assets/img/m00.jpeg");
+    background.addBackground(1, "/provides/assets/img/m01.jpeg");
+    background.addBackground(1, "/provides/assets/img/m02.jpeg");
+
     response.render('directions/contact', {
         menuBar: getMenuBar(4),
+        background: background,
         contentSections: [
             contentSectionContact
         ]
@@ -232,8 +248,15 @@ app.get('/presentation', (request, response) => {
     ContentReader.readContentSectionFile("contents/P-presentation/S-presentation.html", 
     function (err, sectionPresentation) {
         if(err) return;
+
+        var background = new Background();
+        background.addBackground(1, "/provides/assets/img/m00.jpeg");
+        background.addBackground(1, "/provides/assets/img/m01.jpeg");
+        background.addBackground(1, "/provides/assets/img/m02.jpeg");
+
         response.render('directions/presentation', {
             menuBar: getMenuBar(1),
+            background: background,
             contentSections: [
                 sectionPresentation
             ]
@@ -245,8 +268,15 @@ app.get('/mentions-legales', (request, response) => {
     ContentReader.readContentSectionFile("contents/P-mentions-legales/S-mentions-legales.html", 
     function (err, sectionMentionLegale) {
         if(err) return;
+
+        var background = new Background();
+        background.addBackground(1, "/provides/assets/img/m00.jpeg");
+        background.addBackground(1, "/provides/assets/img/m01.jpeg");
+        background.addBackground(1, "/provides/assets/img/m02.jpeg");
+
         response.render('directions/mentions-legales', {
             menuBar: getMenuBar(3),
+            background: background,
             contentSections: [
                 sectionMentionLegale
             ]
@@ -258,8 +288,15 @@ app.get('/services', (request, response) => {
     ContentReader.readContentSectionFile("contents/P-services/S-services.html", 
     function (err, sectionServices) {
         if(err) return;
+
+        var background = new Background();
+        background.addBackground(1, "/provides/assets/img/m00.jpeg");
+        background.addBackground(1, "/provides/assets/img/m01.jpeg");
+        background.addBackground(1, "/provides/assets/img/m02.jpeg");
+
         response.render('directions/services', {
             menuBar: getMenuBar(2),
+            background,
             contentSections: [
                 sectionServices
             ]
@@ -286,9 +323,15 @@ app.get('/services/construction', (request, response) => {
                     ContentReader.readContentSectionFile("contents/C-services/P-construction/S-realisations.html", 
                     function (err, sectionRealisations) {
                         if(err) return;
+
+                        var background = new Background();
+                        background.addBackground(1, "/provides/assets/img/m00.jpeg");
+                        background.addBackground(1, "/provides/assets/img/m01.jpeg");
+                        background.addBackground(1, "/provides/assets/img/m02.jpeg");
                         
                         response.render('directions/services', {
                             menuBar: getMenuBar(2),
+                            background,
                             contentSections: [
                                 sectionMaisonModerne,
                                 sectionMaisonIndividuelle,
@@ -324,9 +367,15 @@ app.get('/services/assainissement', (request, response) => {
                     ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-realisations.html", 
                     function (err, sectionRealisations) {
                         if(err) return;
+
+                        var background = new Background();
+                        background.addBackground(1, "/provides/assets/img/m00.jpeg");
+                        background.addBackground(1, "/provides/assets/img/m01.jpeg");
+                        background.addBackground(1, "/provides/assets/img/m02.jpeg");
                         
                         response.render('directions/services', {
                             menuBar: getMenuBar(2),
+                            background,
                             contentSections: [
                                 sectionMiseConformite,
                                 sectionSeparationReseaux,
@@ -354,9 +403,15 @@ app.get('/services/renovation', (request, response) => {
             ContentReader.readContentSectionFile("contents/C-services/P-renovation/S-realisations.html", 
             function (err, sectionRealisations) {
                 if(err) return;
+
+                var background = new Background();
+                background.addBackground(1, "/provides/assets/img/m00.jpeg");
+                background.addBackground(1, "/provides/assets/img/m01.jpeg");
+                background.addBackground(1, "/provides/assets/img/m02.jpeg");
                 
                 response.render('directions/services', {
                     menuBar: getMenuBar(2),
+                    background,
                     contentSections: [
                         sectionAgencementExterieur,
                         sectionAgencementInterieur,
@@ -373,8 +428,14 @@ app.get('/services/telecom', (request, response) => {
     function (err, sectionAgencementInterieur) {
         if(err) return;
 
+        var background = new Background();
+        background.addBackground(1, "/provides/assets/img/m00.jpeg");
+        background.addBackground(1, "/provides/assets/img/m01.jpeg");
+        background.addBackground(1, "/provides/assets/img/m02.jpeg");
+
         response.render('directions/services', {
             menuBar: getMenuBar(2),
+            background,
             contentSections: [
                 sectionAgencementExterieur,
                 sectionAgencementInterieur,
