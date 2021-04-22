@@ -153,11 +153,17 @@
     margin-left: 2%;
     margin-right: 2%;
 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
     text-align: center;
     font-family: sans-serif;
     font-weight: bold;
+    color: black;
 
-    background-color: #f7ba32;
+    background-color: white;
 }
 
 .menu-bar-contact-message {
@@ -166,11 +172,18 @@
     margin-left: 2%;
     margin-right: 2%;
 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    text-decoration: none;
     text-align: center;
     font-family: sans-serif;
     font-weight: bold;
+    color: black;
 
-    background-color: #f7ba32;
+    background-color: white;
 }
 
 
@@ -202,6 +215,7 @@
     display: flex;
     flex-direction: column;
 
+    margin-bottom: 1%;
     width: 33%;
 }
 
