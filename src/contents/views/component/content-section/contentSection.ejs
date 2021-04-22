@@ -2,9 +2,16 @@
 <div 
 style="
         <% if (contentSection.align) { %>
-            display: flex;
             align-self: <%= contentSection.align%>;
         <% } %>
+
+        <% if (contentSection.marginleft) { %>margin-left: <%= contentSection.marginleft%>%;<% } %>
+        <% if (contentSection.marginright) { %>margin-right: <%= contentSection.marginright%>%;<% } %>
+        <% if (contentSection.margintop) { %>margin-top: <%= contentSection.margintop%>%;<% } %>
+        <% if (contentSection.marginbottom) { %>margin-bottom: <%= contentSection.marginbottom%>%;<% } %>
+
+        <% if (contentSection.width) { %>width: <%= contentSection.width%>%;<% } %>
+        <% if (contentSection.height) { %>height: <%= contentSection.height%>%;<% } %>
         "
 
     <% if (contentSection.id) { %>

@@ -12,6 +12,16 @@ errorContentSection.addBlock(
     "", "", "",
     "Une erreur s'est produite");
 
+function getNodeContentBySelector(block, selector, defaultReturn) {
+    var node = block.querySelector(selector);
+    if(node == null || node.text == "") {
+        return defaultReturn;
+    }
+    else {
+        return node.text;
+    }
+}
+
 var readContentSectionFile = function (filename, callback) {
     fs.readFile(filename, 'utf8', function (err, data) {
         if(err) {
@@ -21,11 +31,23 @@ var readContentSectionFile = function (filename, callback) {
         }
 
         var root = parser.parse(data);
-        var titleSpan = root.querySelector("#section-title");
-        var idSpan = root.querySelector("#section-id");
+        var title = getNodeContentBySelector(root, "#section-title", undefined);
+        var id = getNodeContentBySelector(root, "#section-id", undefined);
+        var width = getNodeContentBySelector(root, "#section-width", undefined);
+        var height = getNodeContentBySelector(root, "#section-height", undefined);
+        var marginleft = getNodeContentBySelector(root, "#section-margin-left", undefined);
+        var marginright = getNodeContentBySelector(root, "#section-margin-right", undefined);
+        var margintop = getNodeContentBySelector(root, "#section-margin-top", undefined);
+        var marginbottom = getNodeContentBySelector(root, "#section-margin-bottom", undefined);
         var section = new ContentSection(
-            titleSpan.text,
-            idSpan.text
+            title,
+            id,
+            width,
+            height,
+            marginleft,
+            marginright,
+            margintop,
+            marginbottom
         );
 
         var blocks = root.querySelectorAll(".section-block");
@@ -33,45 +55,12 @@ var readContentSectionFile = function (filename, callback) {
             var block = blocks[i];
             var blockType = block.querySelector(".section-block-type").text;
             
-            var blockImgNode = block.querySelector(".section-block-img");
-            var blockImg;
-            if(blockImgNode == null || blockImgNode.text == "") {
-                blockImg = undefined;
-            }
-            else {
-                blockImg = blockImgNode.text;
-            }
-
-            var blockUrlNode = block.querySelector(".section-block-url");
-            var blockUrl;
-            if(blockImgNode == null || blockUrlNode.text == "") {
-                blockUrl = undefined;
-            }
-            else {
-                blockUrl = blockUrlNode.text;
-            }
-
-            var blockTitle = block.querySelector(".section-block-title").text;
-            
-            var blockWidthNode = block.querySelector(".section-block-width");
-            var blockWidth;
-            if(blockWidthNode == null || blockWidthNode.text == "") {
-                blockWidth = undefined;
-            }
-            else {
-                blockWidth = blockWidthNode.text;
-            }
-
-            var blockHeightNode = block.querySelector(".section-block-height")
-            var blockHeight;
-            if(blockHeightNode == null || blockHeightNode.text == "") {
-                blockHeight = undefined;
-            }
-            else {
-                blockHeight = blockHeightNode.text;
-            }
-
-            var blockDescription = block.querySelector(".section-block-description").innerHTML;
+            var blockImg = getNodeContentBySelector(block, ".section-block-img", undefined);
+            var blockUrl = getNodeContentBySelector(block, ".section-block-url", undefined);
+            var blockTitle = getNodeContentBySelector(block, ".section-block-title", undefined);
+            var blockWidth = getNodeContentBySelector(block, ".section-block-width", undefined);
+            var blockHeight = getNodeContentBySelector(block, ".section-block-height", undefined);
+            var blockDescription = getNodeContentBySelector(block, ".section-block-description", undefined);
 
             if(blockType == "block") {
                 section.addBlock(

@@ -84,9 +84,18 @@ function ContentSectionBlockForm (action, method, title, description, submitName
  * @param {string} title
  * @param {string} id
  */
-function ContentSection (title, id) {
+function ContentSection (title, id, width, height, marginleft, marginright, margintop, marginbottom) {
     this.title = title;
     this.id = id;
+    
+    this.width = width;
+    this.height = height;
+    
+    this.marginleft = marginleft;
+    this.marginright = marginright;
+    this.margintop = margintop;
+    this.marginbottom = marginbottom;
+
     this.contentSectionBlocks = [];
     this.align = undefined;
 
