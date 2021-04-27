@@ -20,7 +20,7 @@ var {
 var {
     Background
 } = require('./src/contentsmanagement/background');
-var ContentReader = 
+var ContentReader =
     require('./src/contentsmanagement/contentFileReader');
 
 app.set('view engine', 'ejs');
@@ -30,7 +30,7 @@ app.use("/provides", express.static("./src/contents/provides"));
 console.log("Server is starting ... ");
 
 /**
- * @param {number} current 
+ * @param {number} current
  */
 function getMenuBar(current) {
     var menuItemServices = new MenuBarItem(
@@ -60,7 +60,7 @@ function getMenuBar(current) {
     menuItemServices.addSuperSubItem(assainissementItem);
     menuItemServices.addSuperSubItem(renovationItem);
     menuItemServices.addSuperSubItem(telecomItem);
-    
+
     var menuBar = new MenuBar();
     menuBar.addItem(new MenuBarItem(
         "Acceuil", "/",
@@ -76,25 +76,31 @@ function getMenuBar(current) {
 }
 
 app.get('/', (request, response) => {
-    ContentReader.readContentSectionFile("contents/P-acceuil/S-orion.html", 
+    ContentReader.readContentSectionFile("contents/P-acceuil/S-orion.html",
     function (err, sectionOrion) {
         if(err) return;
         ContentReader.readContentSectionFile("contents/P-acceuil/S-actualites.html",
         function (err, sectionActu) {
             if(err) return;
 
-            var background = new Background();
-            background.addBackground(1, "/provides/assets/img/m00.jpeg");
-            background.addBackground(1, "/provides/assets/img/m01.jpeg");
-            background.addBackground(1, "/provides/assets/img/m02.jpeg");
+            ContentReader.readContentSectionFile("contents/P-acceuil/S-count-down.html",
+            function (err, sectionCountDown) {
+                if(err) return;
 
-            response.render('directions/home', {
-                menuBar: getMenuBar(0),
-                background: background,
-                contentSections: [
-                    sectionActu,
-                    sectionOrion
-                ]
+                var background = new Background();
+                background.addBackground(1, "/provides/assets/img/m00.jpeg");
+                background.addBackground(1, "/provides/assets/img/m01.jpeg");
+                background.addBackground(1, "/provides/assets/img/m02.jpeg");
+
+                response.render('directions/home', {
+                    menuBar: getMenuBar(0),
+                    background: background,
+                    contentSections: [
+                        sectionCountDown,
+                        sectionActu,
+                        sectionOrion
+                    ]
+                });
             });
         });
     });
@@ -128,12 +134,12 @@ app.post('/contactform', (request, response) => {
         to: 'gumeteapps@gmail.com',
         subject: 'Message de '+ request.body.nom,
         text:
-            "From : " + request.body.nom + " " + request.body.prenom + "\n" + 
-            "Telephone : " + request.body.phone + "\n" + 
+            "From : " + request.body.nom + " " + request.body.prenom + "\n" +
+            "Telephone : " + request.body.phone + "\n" +
             "Email: " + request.body.email + "\n" +
             "Adresse: " + contactLocationStr + "\n" +
             visitortypeStr+ "\n" +
-            "\n" + 
+            "\n" +
             request.body.message
     };
     transporter.sendMail(
@@ -245,7 +251,7 @@ app.get('/contact', (request, response) => {
 })
 
 app.get('/presentation', (request, response) => {
-    ContentReader.readContentSectionFile("contents/P-presentation/S-presentation.html", 
+    ContentReader.readContentSectionFile("contents/P-presentation/S-presentation.html",
     function (err, sectionPresentation) {
         if(err) return;
 
@@ -265,7 +271,7 @@ app.get('/presentation', (request, response) => {
 })
 
 app.get('/mentions-legales', (request, response) => {
-    ContentReader.readContentSectionFile("contents/P-mentions-legales/S-mentions-legales.html", 
+    ContentReader.readContentSectionFile("contents/P-mentions-legales/S-mentions-legales.html",
     function (err, sectionMentionLegale) {
         if(err) return;
 
@@ -285,7 +291,7 @@ app.get('/mentions-legales', (request, response) => {
 })
 
 app.get('/services', (request, response) => {
-    ContentReader.readContentSectionFile("contents/P-services/S-services.html", 
+    ContentReader.readContentSectionFile("contents/P-services/S-services.html",
     function (err, sectionServices) {
         if(err) return;
 
@@ -304,23 +310,23 @@ app.get('/services', (request, response) => {
     });
 })
 app.get('/services/construction', (request, response) => {
-    ContentReader.readContentSectionFile("contents/C-services/P-construction/S-maison-design.html", 
+    ContentReader.readContentSectionFile("contents/C-services/P-construction/S-maison-design.html",
     function (err, sectionMaisonDesign) {
         if(err) return;
 
-        ContentReader.readContentSectionFile("contents/C-services/P-construction/S-maison-individuelle.html", 
+        ContentReader.readContentSectionFile("contents/C-services/P-construction/S-maison-individuelle.html",
         function (err, sectionMaisonIndividuelle) {
             if(err) return;
-            
-            ContentReader.readContentSectionFile("contents/C-services/P-construction/S-maison-moderne.html", 
+
+            ContentReader.readContentSectionFile("contents/C-services/P-construction/S-maison-moderne.html",
             function (err, sectionMaisonModerne) {
                 if(err) return;
-                
-                ContentReader.readContentSectionFile("contents/C-services/P-construction/S-permit-construire.html", 
+
+                ContentReader.readContentSectionFile("contents/C-services/P-construction/S-permit-construire.html",
                 function (err, sectionPermitConstruire) {
                     if(err) return;
-                    
-                    ContentReader.readContentSectionFile("contents/C-services/P-construction/S-realisations.html", 
+
+                    ContentReader.readContentSectionFile("contents/C-services/P-construction/S-realisations.html",
                     function (err, sectionRealisations) {
                         if(err) return;
 
@@ -328,7 +334,7 @@ app.get('/services/construction', (request, response) => {
                         background.addBackground(1, "/provides/assets/img/m00.jpeg");
                         background.addBackground(1, "/provides/assets/img/m01.jpeg");
                         background.addBackground(1, "/provides/assets/img/m02.jpeg");
-                        
+
                         response.render('directions/services', {
                             menuBar: getMenuBar(2),
                             background,
@@ -348,23 +354,23 @@ app.get('/services/construction', (request, response) => {
 })
 app.get('/services/assainissement', (request, response) => {
 
-    ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-mise-en-conformite.html", 
+    ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-mise-en-conformite.html",
     function (err, sectionMiseConformite) {
         if(err) return;
 
-        ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-separation-reseaux.html", 
+        ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-separation-reseaux.html",
         function (err, sectionSeparationReseaux) {
             if(err) return;
-            
-            ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-terrassement.html", 
+
+            ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-terrassement.html",
             function (err, sectionTerrassement) {
                 if(err) return;
-                
-                ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-vrd.html", 
+
+                ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-vrd.html",
                 function (err, sectionVRD) {
                     if(err) return;
-                    
-                    ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-realisations.html", 
+
+                    ContentReader.readContentSectionFile("contents/C-services/P-assainissement/S-realisations.html",
                     function (err, sectionRealisations) {
                         if(err) return;
 
@@ -372,7 +378,7 @@ app.get('/services/assainissement', (request, response) => {
                         background.addBackground(1, "/provides/assets/img/m00.jpeg");
                         background.addBackground(1, "/provides/assets/img/m01.jpeg");
                         background.addBackground(1, "/provides/assets/img/m02.jpeg");
-                        
+
                         response.render('directions/services', {
                             menuBar: getMenuBar(2),
                             background,
@@ -391,16 +397,16 @@ app.get('/services/assainissement', (request, response) => {
     });
 })
 app.get('/services/renovation', (request, response) => {
-    
-    ContentReader.readContentSectionFile("contents/C-services/P-renovation/S-agencement-exterieur.html", 
+
+    ContentReader.readContentSectionFile("contents/C-services/P-renovation/S-agencement-exterieur.html",
     function (err, sectionAgencementInterieur) {
         if(err) return;
-        
-        ContentReader.readContentSectionFile("contents/C-services/P-renovation/S-agencement-interieur.html", 
+
+        ContentReader.readContentSectionFile("contents/C-services/P-renovation/S-agencement-interieur.html",
         function (err, sectionAgencementExterieur) {
             if(err) return;
-            
-            ContentReader.readContentSectionFile("contents/C-services/P-renovation/S-realisations.html", 
+
+            ContentReader.readContentSectionFile("contents/C-services/P-renovation/S-realisations.html",
             function (err, sectionRealisations) {
                 if(err) return;
 
@@ -408,7 +414,7 @@ app.get('/services/renovation', (request, response) => {
                 background.addBackground(1, "/provides/assets/img/m00.jpeg");
                 background.addBackground(1, "/provides/assets/img/m01.jpeg");
                 background.addBackground(1, "/provides/assets/img/m02.jpeg");
-                
+
                 response.render('directions/services', {
                     menuBar: getMenuBar(2),
                     background,
@@ -423,8 +429,8 @@ app.get('/services/renovation', (request, response) => {
     });
 })
 app.get('/services/telecom', (request, response) => {
-    
-    ContentReader.readContentSectionFile("contents/C-services/P-telecom/S-telecom.html", 
+
+    ContentReader.readContentSectionFile("contents/C-services/P-telecom/S-telecom.html",
     function (err, sectionAgencementInterieur) {
         if(err) return;
 

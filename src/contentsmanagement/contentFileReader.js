@@ -39,6 +39,7 @@ var readContentSectionFile = function (filename, callback) {
         var marginright = getNodeContentBySelector(root, "#section-margin-right", undefined);
         var margintop = getNodeContentBySelector(root, "#section-margin-top", undefined);
         var marginbottom = getNodeContentBySelector(root, "#section-margin-bottom", undefined);
+        var opacity = getNodeContentBySelector(root, "#section-opacity", undefined);
         var section = new ContentSection(
             title,
             id,
@@ -47,7 +48,8 @@ var readContentSectionFile = function (filename, callback) {
             marginleft,
             marginright,
             margintop,
-            marginbottom
+            marginbottom,
+            opacity
         );
 
         var blocks = root.querySelectorAll(".section-block");
@@ -62,12 +64,30 @@ var readContentSectionFile = function (filename, callback) {
             var blockHeight = getNodeContentBySelector(block, ".section-block-height", undefined);
             var blockDescription = getNodeContentBySelector(block, ".section-block-description", undefined);
 
+            var blockStartValue = getNodeContentBySelector(block, ".section-block-start-value", undefined);
+            var blockEndValue = getNodeContentBySelector(block, ".section-block-end-value", undefined);
+            var blockTimeInterval = getNodeContentBySelector(block, ".section-block-time-interval", undefined);
+            var blockTextBefore = getNodeContentBySelector(block, ".section-block-text-before", undefined);
+            var blockTextAfter = getNodeContentBySelector(block, ".section-block-text-after", undefined);
+            var blockStep = getNodeContentBySelector(block, ".section-block-step", undefined);
+
             if(blockType == "block") {
                 section.addBlock(
                     blockImg,
                     blockUrl,
                     blockTitle,
                     blockDescription,
+                    blockWidth,
+                    blockHeight);
+            }
+            else if(blockType == "blockCountDown") {
+                section.addBlockCountDown(
+                    blockStartValue,
+                    blockEndValue,
+                    blockTimeInterval,
+                    blockTextBefore,
+                    blockTextAfter,
+                    blockStep,
                     blockWidth,
                     blockHeight);
             }
