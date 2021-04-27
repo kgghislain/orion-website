@@ -14,11 +14,11 @@ errorContentSection.addBlock(
 
 function getNodeContentBySelector(block, selector, defaultReturn) {
     var node = block.querySelector(selector);
-    if(node == null || node.text == "") {
+    if(node == null || node.innerHTML == "") {
         return defaultReturn;
     }
     else {
-        return node.text;
+        return node.innerHTML;
     }
 }
 

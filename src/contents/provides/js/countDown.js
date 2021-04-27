@@ -52,7 +52,6 @@ for(var i=0; i<countDownDivs.length; i++) {
     };
     countDowns.push(countDown);
     countDown.intervalFunction = function (c) {
-        console.log(c.index);
         intervalFunction(c)
     }
 }
