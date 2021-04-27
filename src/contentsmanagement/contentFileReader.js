@@ -40,6 +40,7 @@ var readContentSectionFile = function (filename, callback) {
         var margintop = getNodeContentBySelector(root, "#section-margin-top", undefined);
         var marginbottom = getNodeContentBySelector(root, "#section-margin-bottom", undefined);
         var opacity = getNodeContentBySelector(root, "#section-opacity", undefined);
+        var alignself = getNodeContentBySelector(root, "#section-align-self", undefined);
         var section = new ContentSection(
             title,
             id,
@@ -51,6 +52,7 @@ var readContentSectionFile = function (filename, callback) {
             marginbottom,
             opacity
         );
+        section.setSelfFlexAlignment(alignself);
 
         var blocks = root.querySelectorAll(".section-block");
         for(var i=0; i<blocks.length; i++) {
