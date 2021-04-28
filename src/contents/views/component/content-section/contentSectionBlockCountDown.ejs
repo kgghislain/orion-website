@@ -1,0 +1,50 @@
+<div class="count-down-div"
+    style="
+    <% if (contentSectionBlockCountDown.width) { %>
+        max-width: <%= contentSectionBlockCountDown.width %>%;
+    <% } %>
+    <% if (contentSectionBlockCountDown.height) { %>
+        max-height: <%= contentSectionBlockCountDown.height %>%;
+    <% } %>
+    ">
+    <span class="count-down-start-value" style="display: none;">
+        <% if(contentSectionBlockCountDown.startValue) { %>
+            <%= contentSectionBlockCountDown.startValue %>
+        <% } else { %>
+            0
+        <% } %>
+    </span>
+    <span class="count-down-end-value" style="display: none;">
+        <% if(contentSectionBlockCountDown.endValue) { %>
+            <%= contentSectionBlockCountDown.endValue %>
+        <% } else { %>
+            100
+        <% } %>
+    </span>
+    <span class="count-down-time-interval" style="display: none;">
+        <% if(contentSectionBlockCountDown.timeInterval) { %>
+            <%= contentSectionBlockCountDown.timeInterval %>
+        <% } else { %>
+            100
+        <% } %>
+    </span>
+    <span class="count-down-step" style="display: none;">
+        <% if(contentSectionBlockCountDown.step) { %>
+            <%= contentSectionBlockCountDown.step %>
+        <% } else { %>
+            5
+        <% } %>
+    </span>
+
+    <h2>
+        <p class="count-down-para">
+            <% if (contentSectionBlockCountDown.textBefore) { %>
+                <%= contentSectionBlockCountDown.textBefore %>
+            <% } %>
+            <span class="count-down-p"></span>
+            <% if (contentSectionBlockCountDown.textAfter) { %>
+                <%= contentSectionBlockCountDown.textAfter %>
+            <% } %>
+        </p>
+    </h2>
+</div>

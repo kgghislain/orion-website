@@ -1,5 +1,5 @@
 <%# Needs: contentSection = ContentSection%>
-<div 
+<div
 style="
         <% if (contentSection.align) { %>
             align-self: <%= contentSection.align%>;
@@ -12,6 +12,10 @@ style="
 
         <% if (contentSection.width) { %>width: <%= contentSection.width%>%;<% } %>
         <% if (contentSection.height) { %>height: <%= contentSection.height%>%;<% } %>
+
+        <% if (contentSection.opacity) { %>
+            background: rgba(255, 255, 255, <%= contentSection.opacity%>);
+        <% } %>
         "
 
     <% if (contentSection.id) { %>
@@ -19,7 +23,7 @@ style="
     <% } %>
 
     class="content-section">
-    
+
     <% if (contentSection.title) { %>
     <h1 class="content-section-title"><%- contentSection.title %></h1>
     <% } %>
@@ -29,6 +33,8 @@ style="
                 <%- include('contentSectionBlock', {contentSectionBlock : contentSectionBlock}) %>
             <% } else if (contentSectionBlock.type == "blockContact") { %>
                 <%- include('contentSectionBlockForm', {contentSectionBlockForm : contentSectionBlock}) %>
+            <% } else if (contentSectionBlock.type == "blockCountDown") { %>
+                <%- include('contentSectionBlockCountDown', {contentSectionBlockCountDown : contentSectionBlock}) %>
             <% } %>
         <% }) %>
     </div>

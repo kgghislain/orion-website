@@ -7,13 +7,13 @@ function incrementCurrent () {
     if(currentBg >= bgs.length) {
         currentBg = 0;
     }
-} 
+}
 
 setInterval(function () {
-    console.log(bgs.length);
     var prev = bgs.item(currentBg);
     incrementCurrent();
     bgs.item(currentBg).style.display = "block";
     bgs.item(currentBg).style.opacity = "1";
     prev.style.opacity = "0";
 }, 5000);
+

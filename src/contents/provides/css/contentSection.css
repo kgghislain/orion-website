@@ -70,7 +70,7 @@
     text-transform: uppercase;
     font-weight: bold;
     color: #0c283d;
-    
+
     border: 0px;
     padding: 2%;
     background-color: #f7ba32;
@@ -85,8 +85,22 @@
     }
     .content-section-block {
         background-color: #eee;
-    
+
         display: flex;
         flex-direction: column;
     }
+}
+
+.count-down-para {
+    text-decoration: none;
+    text-align: center;
+    font-weight: bolder;
+    color: white;
+
+    font-size: xx-large;
+    
+    opacity: 1;
+
+    font-family: 'Zin Sans Extended';
+    /*Zin Sans Extended BoldyCarnokyType*/
 }
