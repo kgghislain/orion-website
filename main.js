@@ -91,7 +91,6 @@ app.get('/', (request, response) => {
                 background.addBackground(1, "/provides/assets/img/m00.jpeg");
                 background.addBackground(1, "/provides/assets/img/m01.jpeg");
                 background.addBackground(1, "/provides/assets/img/m02.jpeg");
-
                 response.render('directions/home', {
                     menuBar: getMenuBar(0),
                     background: background,
