@@ -54,7 +54,7 @@ function getMenuBar(current) {
     renovationItem.addSubSubItem("Agencements exterieur", "/services/renovation/#id-agencement-exterieur")
     renovationItem.addSubSubItem("Agencements interieur", "/services/renovation/#id-agencement-interieur")
     renovationItem.addSubSubItem("Realisations", "/services/renovation/#id-realisations")
-    var telecomItem = new MenuBarSuperSubItem("Telecom", "/sercices/telecom");
+    var telecomItem = new MenuBarSuperSubItem("Telecom", "/services/telecom");
 
     menuItemServices.addSuperSubItem(constructionItem);
     menuItemServices.addSuperSubItem(assainissementItem);
@@ -430,7 +430,7 @@ app.get('/services/renovation', (request, response) => {
 app.get('/services/telecom', (request, response) => {
 
     ContentReader.readContentSectionFile("contents/C-services/P-telecom/S-telecom.html",
-    function (err, sectionAgencementInterieur) {
+    function (err, sectionTelecom) {
         if(err) return;
 
         var background = new Background();
@@ -442,9 +442,7 @@ app.get('/services/telecom', (request, response) => {
             menuBar: getMenuBar(2),
             background,
             contentSections: [
-                sectionAgencementExterieur,
-                sectionAgencementInterieur,
-                sectionRealisations
+                sectionTelecom
             ]
         });
     });
