@@ -3,9 +3,6 @@ var app = express();
 var bodyParser = require('body-parser');
 var nodeMailer = require('nodemailer');
 
-var TEXT = "<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit. Voluptatibus rerum praesentium alias libero officia fugiat qui, molestias nam sunt quasi ut commodi molestiae pariatur tempore reiciendis mollitia doloremque dicta dolore.</p>";
-TEXT += "<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit. Voluptatibus rerum praesentium alias libero officia fugiat qui, molestias nam sunt quasi ut commodi molestiae pariatur tempore reiciendis mollitia doloremque dicta dolore.</p>";
-
 var {
     ContentSection,
     ContentSectionBlockForm,
@@ -54,6 +51,7 @@ function getMenuBar(current) {
     renovationItem.addSubSubItem("Agencements exterieur", "/services/renovation/#id-agencement-exterieur")
     renovationItem.addSubSubItem("Agencements interieur", "/services/renovation/#id-agencement-interieur")
     renovationItem.addSubSubItem("Realisations", "/services/renovation/#id-realisations")
+    renovationItem.addSubSubItem("Renovation thermique", "/services/renovation/#id-renovation-thermique")
     var telecomItem = new MenuBarSuperSubItem("Telecom", "/services/telecom");
 
     menuItemServices.addSuperSubItem(constructionItem);
@@ -330,9 +328,9 @@ app.get('/services/construction', (request, response) => {
                         if(err) return;
 
                         var background = new Background();
-                        background.addBackground(1, "/provides/assets/img/m00.jpeg");
-                        background.addBackground(1, "/provides/assets/img/m01.jpeg");
-                        background.addBackground(1, "/provides/assets/img/m02.jpeg");
+                        background.addBackground(1, "/provides/assets/img/trucks/truck00.jpeg");
+                        background.addBackground(1, "/provides/assets/img/trucks/truck03.jpeg");
+                        background.addBackground(1, "/provides/assets/img/trucks/truck07.jpeg");
 
                         response.render('directions/services', {
                             menuBar: getMenuBar(2),
@@ -409,20 +407,26 @@ app.get('/services/renovation', (request, response) => {
             function (err, sectionRealisations) {
                 if(err) return;
 
-                var background = new Background();
-                background.addBackground(1, "/provides/assets/img/m00.jpeg");
-                background.addBackground(1, "/provides/assets/img/m01.jpeg");
-                background.addBackground(1, "/provides/assets/img/m02.jpeg");
+                ContentReader.readContentSectionFile("contents/C-services/P-renovation/S-renovation-thermique.html",
+                function (err, sectionRenovationThermique) {
+                    if(err) return;
 
-                response.render('directions/services', {
-                    menuBar: getMenuBar(2),
-                    background,
-                    contentSections: [
-                        sectionAgencementExterieur,
-                        sectionAgencementInterieur,
-                        sectionRealisations
-                    ]
-                });
+                    var background = new Background();
+                    background.addBackground(1, "/provides/assets/img/m00.jpeg");
+                    background.addBackground(1, "/provides/assets/img/m01.jpeg");
+                    background.addBackground(1, "/provides/assets/img/m02.jpeg");
+
+                    response.render('directions/services', {
+                        menuBar: getMenuBar(2),
+                        background,
+                        contentSections: [
+                            sectionAgencementExterieur,
+                            sectionAgencementInterieur,
+                            sectionRealisations,
+                            sectionRenovationThermique
+                        ]
+                    });
+                })
             });
         });
     });

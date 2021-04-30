@@ -1,7 +1,12 @@
+@font-face {
+    font-family: orion;
+    src: url("font/zin_sans_extended_carnokytype.otf"), format(opentype);
+}
+
 footer {
     background-color: white;
     padding: 2%;
-    font-family: sans-serif;
+    font-family: 'orion', sans-serif;
 
     display: flex;
     flex-direction: row;
@@ -25,7 +30,7 @@ footer {
     padding: 1%;
 
     text-align: center;
-    font-family: sans-serif;
+    font-family: 'orion', sans-serif;
     font-weight: bold;
 }
 .footer-contact-contact {
@@ -36,7 +41,7 @@ footer {
     padding: 1%;
 
     text-align: center;
-    font-family: sans-serif;
+    font-family: 'orion', sans-serif;
     font-weight: bold;
     text-decoration: none;
 }

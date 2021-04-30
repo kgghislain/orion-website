@@ -56,17 +56,25 @@ for(var i=0; i<countDownDivs.length; i++) {
     }
 }
 
+function countDownFunction(countDown) {
+    if(!isCountDownHidden(countDown)) {
+        if(countDown.wasHidden && countDown.intervalHandle == undefined) {
+            countDown.wasHidden = false;
+            countDown.currentValue = countDown.startValue;
+            countDown.intervalHandle = setInterval(countDown.intervalFunction, timeInterval, countDown);
+        }
+    }
+    else {
+        countDown.wasHidden = true;
+    }
+}
+
 window.addEventListener("scroll", function () {
     countDowns.forEach(countDown => {
-        if(!isCountDownHidden(countDown)) {
-            if(countDown.wasHidden && countDown.intervalHandle == undefined) {
-                countDown.wasHidden = false;
-                countDown.currentValue = countDown.startValue;
-                countDown.intervalHandle = setInterval(countDown.intervalFunction, timeInterval, countDown);
-            }
-        }
-        else {
-            countDown.wasHidden = true;
-        }
+        countDownFunction(countDown);
     });
+});
+
+countDowns.forEach(countDown => {
+    countDownFunction(countDown);
 });
